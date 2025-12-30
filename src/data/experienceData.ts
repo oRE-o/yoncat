@@ -10,55 +10,47 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     id: 1,
-    role: "경기북과학등학교 재학",
-    company: "경기북과학고등학교",
-    period: "Feb 2021 — Feb 2024",
+    role: "경기북과학고등학교 졸업",
+    company: "Gyeonggibuk Science High School",
+    period: "Mar 2021 — Feb 2024",
     description:
-      "항공우주 분야에 관심이 커 경기북과학고등학교에 진학하게 되었습니다. 물리와 공학 분야를 학습하며 로켓 추진에 대한 관심을 키웠습니다.",
-    color: "text-blue-400",
+      "물리와 공학, 그리고 컴퓨터 과학의 기초를 다졌습니다. 프로그래밍 분야에 깊은 관심을 가지고 다양한 탐구 활동을 수행했습니다.",
+    color: "text-red-500", // 테마에 맞춰 핑크로 변경!
   },
   {
     id: 2,
-    role: "아주대학교 학부생",
-    company: "아주대학교",
-    period: "Mar 2024 — Present",
-    description: "아주대학교 국방디지털융합학과 10기 재학 중 입니다.",
+    role: "전산학부 학부생",
+    company: "KAIST",
+    period: "Feb 2024 — Present",
+    description:
+      "KAIST 전산학부(School of Computing)에 재학 중입니다. CS 기초 전반과 알고리즘, 시스템 프로그래밍 등을 깊이 있게 학습하고 있습니다.",
     color: "text-blue-400",
   },
   {
     id: 3,
-    role: "Propulsion Engineer & Advisor",
-    company: "AJORO",
-    period: "Jun 2024 — Present",
+    role: "Developer",
+    company: "SPARCS",
+    period: "Mar 2024 — Present",
     description:
-      "아주대학교의 로켓 동아리 AJOURO에서 추진 시스템 개발을 담당하고 있고, 동체 · 발사대 등 로켓 시스템 전반에 대한 설계/시험 조언을 수행하고 있습니다.",
-    color: "text-blue-400",
+      "KAIST의 대표적인 서비스 개발 단체 SPARCS에서 활동하고 있습니다. 학내 구성원들이 사용하는 실제 서비스를 기획, 개발, 배포하며 풀스택 개발 역량을 키우고 있습니다.",
+    color: "text-orange-400",
   },
   {
     id: 4,
-    role: "Part-Time Cooling Engineer",
-    company: "VF Space",
-    period: "Feb 2024 — Aug 2024",
+    role: "Game Developer",
+    company: "HAJE (KAIST Game Dev Club)",
+    period: "Sep 2024 — Present",
     description:
-      "VF Space에서 3kN LOX/Kerosene 재생 냉각 연소기 설계를 담당했습니다.",
-    color: "text-blue-400",
+      "KAIST 게임 제작 동아리 '하제'에서 활동 중입니다. Unity와 Godot 엔진 등을 활용하여 독창적인 게임을 기획하고 개발합니다.",
+    color: "text-amber-400",
   },
   {
     id: 5,
-    role: "Propulsion Engineer & Additive Manufacturing Engineer",
-    company: "VF Space",
-    period: "Aug 2024 — Dec 2024",
+    role: "Winter Intern",
+    company: "5minlab (KRAFTON)",
+    period: "Dec 2024 — Feb 2025",
     description:
-      "VF Space에서 3kN LOX/Kerosene 연소기 개발 및 WLAM Metal 3D Printer 운용·시험을 담당했습니다.",
-    color: "text-blue-400",
-  },
-  {
-    id: 6,
-    role: "Project Manager & Propulsion Engineer",
-    company: "VF Space",
-    period: "Jan 2025 — Apr 2025",
-    description:
-      "VF Space에서 사운딩 로켓 프로젝트의 PM을 수행, 액체 연소기 시스템 및 동체 개발을 담당했습니다.",
-    color: "text-blue-400",
+      "크래프톤(KRAFTON) 산하의 독립 스튜디오 5minlab에서 겨울방학 인턴십을 수행했습니다. 현업 게임 개발 파이프라인을 경험하며 실무 역량을 쌓았습니다.",
+    color: "text-yellow-400",
   },
 ];
