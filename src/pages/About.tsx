@@ -1,4 +1,3 @@
-import React from "react";
 import Experience from "../components/sections/Experience";
 import { Link } from "react-router-dom";
 
