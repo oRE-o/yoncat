@@ -24,7 +24,7 @@ const Experience = () => {
             </div>
 
             <h4 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-pink-400 mb-4 w-fit">
-              @ {exp.company}
+              @{exp.company}
             </h4>
 
             <p className="text-gray-300 leading-relaxed text-lg font-light max-w-3xl">
