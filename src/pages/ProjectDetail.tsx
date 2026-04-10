@@ -21,7 +21,7 @@ const ProjectDetail = () => {
         </h2>
         <Link
           to="/projects"
-          className="text-pink-500 hover:text-pink-400 font-bold underline underline-offset-8 transition-colors"
+          className="text-emerald-500 hover:text-emerald-400 font-bold underline underline-offset-8 transition-colors"
         >
           Return to Projects
         </Link>
@@ -65,7 +65,7 @@ const ProjectDetail = () => {
           <h1 className="text-4xl md:text-6xl font-black leading-none tracking-tighter">
             {project.title}
           </h1>
-          <p className="text-xl md:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-pink-400 font-bold">
+          <p className="text-xl md:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400 font-bold">
             {project.category}
           </p>
         </div>
@@ -96,7 +96,7 @@ const ProjectDetail = () => {
         {/* 왼쪽: 설명 & 스택 */}
         <div className="lg:col-span-2 space-y-12">
           <div>
-            <h3 className="text-2xl font-bold mb-6 text-white border-l-4 border-pink-500 pl-4">
+            <h3 className="text-2xl font-bold mb-6 text-white border-l-4 border-emerald-500 pl-4">
               Overview
             </h3>
             <p className="text-gray-300 leading-relaxed text-lg whitespace-pre-line font-light">
@@ -109,7 +109,7 @@ const ProjectDetail = () => {
               {project.tags?.map((tag, index) => (
                 <span
                   key={index}
-                  className="bg-white/5 text-pink-300 px-4 py-2 rounded-lg text-sm font-medium border border-white/10 hover:border-pink-500/50 transition-colors"
+                  className="bg-white/5 text-emerald-300 px-4 py-2 rounded-lg text-sm font-medium border border-white/10 hover:border-emerald-500/50 transition-colors"
                 >
                   #{tag}
                 </span>
@@ -167,13 +167,13 @@ const ProjectDetail = () => {
             <>
               <button
                 onClick={prevSlide}
-                className="absolute left-6 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-pink-600 p-4 rounded-full backdrop-blur-md transition-all text-white z-20 border border-white/10 hover:scale-110"
+                className="absolute left-6 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-emerald-600 p-4 rounded-full backdrop-blur-md transition-all text-white z-20 border border-white/10 hover:scale-110"
               >
                 ←
               </button>
               <button
                 onClick={nextSlide}
-                className="absolute right-6 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-pink-600 p-4 rounded-full backdrop-blur-md transition-all text-white z-20 border border-white/10 hover:scale-110"
+                className="absolute right-6 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-emerald-600 p-4 rounded-full backdrop-blur-md transition-all text-white z-20 border border-white/10 hover:scale-110"
               >
                 →
               </button>
@@ -186,7 +186,7 @@ const ProjectDetail = () => {
                     onClick={() => setCurrentIndex(idx)}
                     className={`h-2.5 rounded-full transition-all duration-300 ${
                       idx === currentIndex
-                        ? "w-8 bg-pink-500"
+                        ? "w-8 bg-emerald-500"
                         : "w-2.5 bg-gray-500 hover:bg-gray-300"
                     }`}
                   />

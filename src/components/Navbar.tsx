@@ -20,39 +20,39 @@ const Navbar = () => {
     setIsOpen(false);
   }, [pathname]);
 
-  // ✨ Active 상태: 레드-핑크 컬러 + 핑크빛 그림자
+  // ✨ Active state: mint/teal color + glow
   const navLinkStyle = ({ isActive }: { isActive: boolean }) =>
     `relative px-2 py-1 text-sm font-medium transition-all duration-300
      ${
        isActive
-         ? "text-red-400 font-bold drop-shadow-[0_0_8px_rgba(244,63,94,0.6)]"
-         : "text-gray-400 hover:text-red-300"
+         ? "text-emerald-400 font-bold drop-shadow-[0_0_8px_rgba(62,201,167,0.6)]"
+         : "text-gray-400 hover:text-emerald-300"
      }`;
 
   return (
     <>
-      {/* 🚀 Navbar Container 
-          - border-red-500/30: 붉은 테두리
-          - shadow: 핑크빛 은은한 그림자
+      {/* Navbar Container
+          - border-emerald-500/30: mint/teal border
+          - shadow: mint glow
       */}
       <nav
         className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 
                     w-[90%] md:w-auto md:min-w-[700px] max-w-5xl
                     flex items-center justify-between px-6 py-3
-                    rounded-full border border-red-500/30
+                    rounded-full border border-emerald-500/30
                     bg-black/70 backdrop-blur-md
-                    shadow-[0_0_20px_rgba(244,63,94,0.15)]
+                    shadow-[0_0_20px_rgba(62,201,167,0.15)]
                     transition-all duration-300 ${
                       scrolled ? "bg-black/90" : ""
                     }`}
       >
         {/* Logo Section */}
         <NavLink to="/" className="flex items-center gap-3 group">
-          <div className="relative flex items-center justify-center w-8 h-8 bg-gradient-to-br from-red-500 to-pink-600 rounded-full group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-red-500/20">
-            <span className="text-lg"></span>
+          <div className="relative flex items-center justify-center w-8 h-8 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-emerald-500/20">
+            <span className="text-lg">🐱</span>
           </div>
 
-          <span className="text-xl font-bold tracking-wide text-white font-montserrat group-hover:text-pink-100 transition-colors">
+          <span className="text-xl font-bold tracking-wide text-white font-montserrat group-hover:text-emerald-100 transition-colors">
             yon.cat
           </span>
         </NavLink>
@@ -75,7 +75,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-gray-300 hover:text-red-400 transition-colors"
+          className="md:hidden text-gray-300 hover:text-emerald-400 transition-colors"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -85,8 +85,8 @@ const Navbar = () => {
       {/* Mobile Menu Overlay */}
       <div
         className={`fixed top-24 left-1/2 -translate-x-1/2 w-[90%] z-40 
-                    bg-[#0a0a0a]/95 backdrop-blur-xl border border-red-500/20 rounded-2xl 
-                    overflow-hidden transition-all duration-300 ease-in-out origin-top shadow-2xl shadow-red-900/20
+                    bg-[#0a0a0a]/95 backdrop-blur-xl border border-emerald-500/20 rounded-2xl 
+                    overflow-hidden transition-all duration-300 ease-in-out origin-top shadow-2xl shadow-emerald-900/20
                     ${
                       isOpen
                         ? "opacity-100 scale-100 max-h-[300px]"
@@ -96,25 +96,25 @@ const Navbar = () => {
         <div className="flex flex-col items-center gap-6 py-8">
           <NavLink
             to="/"
-            className="text-lg text-gray-300 hover:text-red-400 font-medium"
+            className="text-lg text-gray-300 hover:text-emerald-400 font-medium"
           >
             Home
           </NavLink>
           <NavLink
             to="/about"
-            className="text-lg text-gray-300 hover:text-red-400 font-medium"
+            className="text-lg text-gray-300 hover:text-emerald-400 font-medium"
           >
             About
           </NavLink>
           <NavLink
             to="/projects"
-            className="text-lg text-gray-300 hover:text-red-400 font-medium"
+            className="text-lg text-gray-300 hover:text-emerald-400 font-medium"
           >
             Projects
           </NavLink>
           <NavLink
             to="/contact"
-            className="text-lg text-gray-300 hover:text-red-400 font-medium"
+            className="text-lg text-gray-300 hover:text-emerald-400 font-medium"
           >
             Contact
           </NavLink>

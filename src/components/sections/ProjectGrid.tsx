@@ -77,7 +77,7 @@ const ProjectGrid = () => {
                 <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
                   
                   {/* 카테고리 (Game / Service 등) - 핑크색 포인트 */}
-                  <span className="block text-xs font-bold text-pink-400 mb-2 uppercase tracking-wider">
+                  <span className="block text-xs font-bold text-emerald-400 mb-2 uppercase tracking-wider">
                     {project.category} 
                   </span>
 
@@ -89,7 +89,7 @@ const ProjectGrid = () => {
                     {/* 태그 정보 */}
                     <div className="flex flex-wrap gap-2">
                       {project.tags && project.tags.length > 0 && (
-                        <span className="text-gray-200 text-xs md:text-sm font-medium bg-white/10 px-3 py-1.5 rounded-lg backdrop-blur-md border border-white/10 group-hover:border-pink-500/50 transition-colors">
+                        <span className="text-gray-200 text-xs md:text-sm font-medium bg-white/10 px-3 py-1.5 rounded-lg backdrop-blur-md border border-white/10 group-hover:border-emerald-500/50 transition-colors">
                           #{project.tags[0]}
                         </span>
                       )}

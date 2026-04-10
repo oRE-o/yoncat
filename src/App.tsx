@@ -1,35 +1,54 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import ScrollToTop from "./components/ScrollToTop"; // ✨ 추가됨
+// src/App.tsx
+import { useEffect, useRef } from 'react';
+import Lenis from 'lenis';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Projects from "./pages/Projects";
-import Contact from "./pages/Contact";
-import ProjectDetail from "./pages/ProjectDetail";
+import GrainOverlay from './components/GrainOverlay';
+import HeroPoster from './components/HeroPoster';
+
+import AboutStrip from './components/AboutStrip';
+import ProjectShowcase from './components/ProjectShowcase';
+import ContactFooter from './components/ContactFooter';
+
+gsap.registerPlugin(ScrollTrigger);
 
 function App() {
+  const lenisRef = useRef<Lenis | null>(null);
+
+  useEffect(() => {
+    // Initialize Lenis smooth scroll
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
+    lenisRef.current = lenis;
+
+    // Connect Lenis to GSAP ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      lenis.destroy();
+      gsap.ticker.remove(lenis.raf);
+    };
+  }, []);
+
   return (
-    <Router>
-      <ScrollToTop /> {/* ✨ 페이지 이동 시 스크롤 초기화 */}
-      <div className="min-h-screen bg-black text-white selection:bg-purple-500/30">
-        <Navbar />
+    <>
+      <GrainOverlay />
+      <main>
+        <HeroPoster />
 
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/projects/:id" element={<ProjectDetail />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </main>
-
-        <footer className="py-8 text-center text-sm text-gray-600 border-t border-white/5 mt-auto">
-          © 2026 oREoTheCream. All rights reserved.
-        </footer>
-      </div>
-    </Router>
+        <AboutStrip />
+        <ProjectShowcase />
+        <ContactFooter />
+      </main>
+    </>
   );
 }
 

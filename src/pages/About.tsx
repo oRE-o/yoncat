@@ -8,7 +8,7 @@ const About = () => {
       <div className="mb-20 max-w-4xl">
         <h1 className="text-5xl md:text-6xl font-black mb-8 leading-tight tracking-tight">
           About{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-pink-500">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">
             Me
           </span>
         </h1>
@@ -24,7 +24,7 @@ const About = () => {
           </p>
 
           <p>
-            <strong className="text-pink-400">Game Development</strong>{" "}
+            <strong className="text-emerald-400">Game Development</strong>{" "}
             분야에서는 플레이어에게 깊은 몰입감을 주는 인터랙션과 연출을
             고민합니다. Unity와 Godot 엔진을 활용해 다양한 장르의 게임을
             기획·개발해왔으며,
@@ -34,7 +34,7 @@ const About = () => {
           </p>
 
           <p>
-            <strong className="text-pink-400">Web & Service</strong> 분야에서는
+            <strong className="text-emerald-400">Web & Service</strong> 분야에서는
             사용자에게 실질적인 가치를 전달하는 안정적인 시스템을 구축합니다.
             <span className="text-white/80"> SPARCS</span> 활동을 통해 기획부터
             배포까지 서비스의 전 주기를 경험하며, 단단하고 확장 가능한
@@ -49,7 +49,7 @@ const About = () => {
             에 집중합니다. 제가 지금까지 치열하게 고민하고 만들어온 결과물들은{" "}
             <Link
               to="/projects"
-              className="text-red-400 hover:text-pink-300 font-bold underline underline-offset-4 transition-colors"
+              className="text-emerald-400 hover:text-teal-300 font-bold underline underline-offset-4 transition-colors"
             >
               Projects
             </Link>{" "}
