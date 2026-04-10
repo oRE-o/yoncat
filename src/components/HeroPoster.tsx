@@ -2,6 +2,51 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { colorScheme } from '../design/colorScheme';
 import { Power3 } from 'gsap';
+import HeroChip, { type FloaterVariant } from './HeroChip';
+
+type FloaterConfig = {
+  id: string;
+  depth: number;
+  position: React.CSSProperties;
+  variant: FloaterVariant;
+  text?: React.ReactNode;
+  colorProps?: { color?: string; bg?: string; border?: string; shadow?: string };
+  fontSize?: string;
+  opacity?: number;
+  zIndex?: number;
+  hideOnMobile?: boolean;
+};
+
+const FLOATER_DATA: FloaterConfig[] = [
+  // --- CENTER CLUSTERS ---
+  { id: 'cl1', depth: 1.2, zIndex: 3, position: { top: '42%', left: '30%' }, variant: 'glass', colorProps: { border: colorScheme.borderStrong, color: colorScheme.text }, text: '#OTAKU', fontSize: '1rem' },
+  { id: 'cl2', depth: 2.8, zIndex: 4, position: { top: '50%', left: '34%' }, variant: 'sparkle', text: '✦', colorProps: { color: colorScheme.third1 }, fontSize: 'clamp(4rem, 10vw, 7rem)' },
+  { id: 'cl3', depth: -1.2, zIndex: 1, position: { top: '35%', left: '38%' }, variant: 'symbol', text: '+', colorProps: { color: colorScheme.textDim }, opacity: 0.6, fontSize: '2.5rem' },
+  { id: 'cl4', depth: 3.5, zIndex: 5, position: { top: '68%', left: '40%' }, variant: 'bordered', text: '実行力', colorProps: { border: colorScheme.borderStrong, color: colorScheme.text, bg: colorScheme.bgAlt }, hideOnMobile: true, fontSize: '1.1rem' },
+
+  { id: 'cr1', depth: 2.2, zIndex: 3, position: { top: '35%', right: '30%' }, variant: 'bordered', text: 'CREATIVE', colorProps: { border: colorScheme.primary1, color: colorScheme.primary2, bg: colorScheme.bgAlt }, fontSize: '1.1rem' },
+  { id: 'cr2', depth: 3.5, zIndex: 4, position: { top: '58%', right: '35%' }, variant: 'sparkle', text: '✦', colorProps: { color: colorScheme.primary1 }, fontSize: 'clamp(4.5rem, 12vw, 8rem)' },
+  { id: 'cr3', depth: -2.5, zIndex: 1, position: { top: '45%', right: '42%' }, variant: 'symbol', text: '+', colorProps: { color: colorScheme.textDim }, opacity: 0.45, fontSize: '2.8rem' },
+  { id: 'cr4', depth: 4.2, zIndex: 5, position: { top: '72%', right: '34%' }, variant: 'filled', text: 'AESTHETIC', colorProps: { bg: colorScheme.secondary1, color: colorScheme.bg }, hideOnMobile: true, fontSize: '1.2rem' },
+
+  // --- ADDITIONAL ENLARGED SPARKLES ---
+  { id: 's1', depth: 1.8, zIndex: 2, position: { top: '30%', left: '32%' }, variant: 'sparkle', text: '✦', colorProps: { color: colorScheme.primary2 }, opacity: 0.8, fontSize: '4rem' },
+  { id: 's2', depth: -2, zIndex: 1, position: { top: '75%', left: '38%' }, variant: 'sparkle', text: '✦', colorProps: { color: colorScheme.textDim }, opacity: 0.6, fontSize: '3rem' },
+  { id: 's3', depth: 3, zIndex: 4, position: { top: '65%', right: '42%' }, variant: 'sparkle', text: '✦', colorProps: { color: colorScheme.third1 }, opacity: 0.9, fontSize: '4.5rem' },
+  { id: 's4', depth: -1.5, zIndex: 1, position: { top: '28%', right: '35%' }, variant: 'sparkle', text: '✦', colorProps: { color: colorScheme.textMuted }, opacity: 0.7, fontSize: '3.8rem' },
+  { id: 's5', depth: 2.5, zIndex: 2, position: { top: '45%', left: '44%' }, variant: 'sparkle', text: '✦', colorProps: { color: colorScheme.primary1 }, opacity: 0.7, fontSize: '3.2rem' },
+
+  // --- OUTER DECORATIONS ---
+  { id: 'l1', depth: 1.5, zIndex: 2, position: { top: '32%', left: '26%' }, variant: 'sparkle', text: '✦', colorProps: { color: colorScheme.third1 }, opacity: 0.6, hideOnMobile: true, fontSize: '3rem' },
+  { id: 'l2', depth: -3, zIndex: 1, position: { bottom: '30%', left: '28%' }, variant: 'dashed', text: 'WARNING', colorProps: { border: colorScheme.third1, color: colorScheme.third2 }, hideOnMobile: true },
+
+  { id: 'r1', depth: 1.2, zIndex: 2, position: { top: '25%', right: '28%' }, variant: 'sparkle', text: '✦', colorProps: { color: colorScheme.textDim }, opacity: 0.7, hideOnMobile: true, fontSize: '2.5rem' },
+  { id: 'r2', depth: 4.5, zIndex: 5, position: { bottom: '38%', right: '30%' }, variant: 'filled', text: '#Nerd', colorProps: { bg: colorScheme.third1, color: '#fff' }, hideOnMobile: true },
+
+  // --- BACKGROUND DETAILS ---
+  { id: 'bg1', zIndex: 0, depth: -4, position: { top: '-5%', right: '-5%' }, variant: 'circle', colorProps: { border: colorScheme.border }, opacity: 0.15 },
+  { id: 'bg2', zIndex: 0, depth: -3.5, position: { bottom: '-10%', left: '-10%' }, variant: 'circle', colorProps: { border: colorScheme.border }, opacity: 0.2 },
+];
 
 const TAGS = [
   'OTAKU',
@@ -27,30 +72,29 @@ const HeroPoster: React.FC = () => {
   const targetCoords = useRef({ x: 0, y: 0 });
   const rAF = useRef<number>(0);
 
+  const [isMobile, setIsMobile] = React.useState(false);
+
   useEffect(() => {
-    let isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const checkMobile = () => {
+      setIsMobile(window.matchMedia('(max-width: 768px)').matches);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
 
     const handleMove = (e: MouseEvent | TouchEvent) => {
-      if (isMobile) return;
+      const isMob = window.matchMedia('(max-width: 768px)').matches;
+      if (isMob) return;
       const x = 'clientX' in e ? e.clientX : e.touches[0].clientX;
       const y = 'clientY' in e ? e.clientY : e.touches[0].clientY;
       targetCoords.current.x = (x - window.innerWidth / 2) / (window.innerWidth / 2);
       targetCoords.current.y = (y - window.innerHeight / 2) / (window.innerHeight / 2);
     };
 
-    const handleResize = () => {
-      isMobile = window.matchMedia('(max-width: 768px)').matches;
-      if (isMobile) {
-        targetCoords.current = { x: 0, y: 0 };
-        mouseCoords.current = { x: 0, y: 0 };
-      }
-    };
-
     window.addEventListener('mousemove', handleMove, { passive: true });
     window.addEventListener('touchmove', handleMove, { passive: true });
-    window.addEventListener('resize', handleResize);
 
     const tick = () => {
+      const isMob = window.matchMedia('(max-width: 768px)').matches;
       const cur = mouseCoords.current;
       const tg = targetCoords.current;
       cur.x += (tg.x - cur.x) * 0.08;
@@ -60,26 +104,28 @@ const HeroPoster: React.FC = () => {
       const mousePY = window.innerHeight / 2 + cur.y * (window.innerHeight / 2);
 
       if (charRef.current) {
-        charRef.current.style.transform = `translate(${cur.x * 6}px, ${cur.y * 4}px)`;
+        charRef.current.style.transform = `translate(${cur.x * 12}px, ${cur.y * 8}px)`;
         charRef.current.style.filter = `drop-shadow(0 8px 30px rgba(0,0,0,0.2))`;
       }
       if (titleBlockRef.current) {
-        titleBlockRef.current.style.transform = `translate(${cur.x * -4}px, ${cur.y * -3}px)`;
+        titleBlockRef.current.style.transform = `translate(${cur.x * -10}px, ${cur.y * -8}px)`;
       }
 
       floatersRef.current.forEach((el) => {
         if (!el) return;
         const depth = parseFloat(el.dataset.depth || '1');
-        const trX = cur.x * depth * 15;
-        const trY = cur.y * depth * 10;
+        const trX = cur.x * depth * 25;
+        const trY = cur.y * depth * 18;
 
         let blurAmount = 0;
-        if (!isMobile) {
+        if (!isMob) {
           const rect = el.getBoundingClientRect();
           const cx = rect.left + rect.width / 2;
           const cy = rect.top + rect.height / 2;
           const dist = Math.hypot(mousePX - cx, mousePY - cy);
           blurAmount = Math.max(0, Math.min((dist - 150) / 100, Math.abs(depth) * 2.5 + 4));
+        } else {
+          blurAmount = Math.abs(depth) * 0.8;
         }
 
         el.style.transform = `translate(${trX}px, ${trY}px)`;
@@ -93,7 +139,7 @@ const HeroPoster: React.FC = () => {
     return () => {
       window.removeEventListener('mousemove', handleMove);
       window.removeEventListener('touchmove', handleMove);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', checkMobile);
       cancelAnimationFrame(rAF.current);
     };
   }, []);
@@ -125,7 +171,7 @@ const HeroPoster: React.FC = () => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        paddingTop: '18vh',
+        paddingTop: isMobile ? '22vh' : '15vh',
         overflow: 'hidden',
         backgroundColor: colorScheme.bgHero,
       }}
@@ -149,27 +195,40 @@ const HeroPoster: React.FC = () => {
         className="hero-title-block"
         style={{
           position: 'relative', zIndex: 2, textAlign: 'center',
-          pointerEvents: 'none', userSelect: 'none', marginBottom: '-6.5rem',
+          pointerEvents: 'none', userSelect: 'none',
+          marginBottom: isMobile ? '-2rem' : '-6.5rem',
+          transition: 'all 0.3s ease',
+          width: '90vw',
         }}
       >
         <div style={{
           display: 'flex', flexDirection: 'column', alignItems: 'center',
           fontFamily: "'Quicksand', sans-serif",
-          fontSize: 'clamp(0.75rem, 1.3vw, 1.0rem)', fontWeight: 700,
+          fontSize: 'clamp(0.7rem, 1.3vw, 1.0rem)', fontWeight: 700,
           letterSpacing: '0.12em', textTransform: 'uppercase',
           marginBottom: '0.6rem', position: 'relative', zIndex: 1, lineHeight: 1.3,
         }}>
-          <span style={{ transform: 'translateX(-2.5rem)', color: colorScheme.text }}>Creative Artist</span>
-          <span style={{ transform: 'translateX(3.5rem)', color: colorScheme.third1 }}>Software Engineer</span>
-          <span style={{ transform: 'translateX(-1rem)', color: colorScheme.textDim }}>Nerd Aesthetics</span>
+          <span style={{ transform: isMobile ? 'translateX(-1.5rem)' : 'translateX(-2.5rem)', color: colorScheme.text }}>Creative Artist</span>
+          <span style={{ transform: isMobile ? 'translateX(2rem)' : 'translateX(3.5rem)', color: colorScheme.third1 }}>Software Engineer</span>
+          <span style={{ transform: isMobile ? 'translateX(-0.6rem)' : 'translateX(-1rem)', color: colorScheme.textDim }}>Nerd Aesthetics</span>
         </div>
         <h1 className="hero-title" style={{
           fontFamily: "'Quicksand', sans-serif",
-          fontSize: 'clamp(2.8rem, 8vw, 7rem)', fontWeight: 700,
+          fontSize: isMobile ? 'clamp(1.8rem, 10vw, 3.5rem)' : 'clamp(2.8rem, 8vw, 7rem)', fontWeight: 700,
           letterSpacing: '-0.02em', color: colorScheme.primary1,
-          lineHeight: 0.95, textShadow: '0 4px 24px rgba(0,0,0,0.15)', whiteSpace: 'nowrap',
+          lineHeight: 0.95, textShadow: '0 4px 24px rgba(0,0,0,0.15)',
+          whiteSpace: 'normal',
+          wordBreak: 'break-word',
         }}>
-          Sonagii<span style={{ color: colorScheme.third1 }}>_</span>
+          {isMobile ? (
+            <>
+              Yonghyuk<br />Choi<span style={{ color: colorScheme.third1 }}>_</span>
+            </>
+          ) : (
+            <>
+              Yonghyuk Choi<span style={{ color: colorScheme.third1 }}>_</span>
+            </>
+          )}
         </h1>
       </div>
 
@@ -180,21 +239,25 @@ const HeroPoster: React.FC = () => {
         style={{
           position: 'relative', zIndex: 3, display: 'flex',
           flex: 1, minHeight: 0, alignItems: 'flex-end', justifyContent: 'center',
-          overflow: 'hidden', width: '100%', maxWidth: '850px',
+          overflow: 'hidden', width: '100%',
+          maxWidth: isMobile ? '1000px' : '850px', // Increased mobile maxWidth
           WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
           maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+          marginTop: isMobile ? '4.5rem' : '0', // Moved down slightly more
+          transition: 'margin 0.3s ease',
         }}
       >
         <img
           ref={charRef}
           src="/1.png"
-          alt="Sonagii_ character"
+          alt="Yonghyuk Choi character"
           className="hero-character"
           style={{
             position: 'relative', width: '100%', height: '100%',
             objectFit: 'contain', objectPosition: 'bottom center',
             filter: 'drop-shadow(0 8px 30px rgba(0,0,0,0.2))',
             willChange: 'transform',
+            transform: isMobile ? 'scale(1.5)' : 'none', // Slightly larger scale
           }}
         />
       </div>
@@ -222,18 +285,6 @@ const HeroPoster: React.FC = () => {
               fontFamily: "'Quicksand', sans-serif",
               boxShadow: '0 10px 28px rgba(26, 31, 36, 0.08)',
             }}
-            onMouseEnter={(e) => {
-              const el = e.currentTarget;
-              el.style.background = colorScheme.primary3;
-              el.style.borderColor = colorScheme.primary1;
-              el.style.transform = 'translateY(-3px) scale(1.05)';
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget;
-              el.style.background = colorScheme.bgAlt;
-              el.style.borderColor = colorScheme.borderStrong;
-              el.style.transform = '';
-            }}
           >
             {tag}
           </span>
@@ -258,165 +309,46 @@ const HeroPoster: React.FC = () => {
       </div>
 
       {/* ===================== FLOATERS ===================== */}
-      {/* All pills/sparkles are constrained to LEFT (left:0-15%) or RIGHT (right:0-12%) */}
+      {FLOATER_DATA
+        .filter(item => !isMobile || !item.hideOnMobile)
+        .map((item, index) => {
+          const finalPosition = { ...item.position };
+          if (isMobile) {
+            // Push towards edges more aggressively (up to 20% shift)
+            if (finalPosition.left) {
+              const val = parseFloat(finalPosition.left as string);
+              finalPosition.left = `${Math.max(2, val - 22)}%`;
+            }
+            if (finalPosition.right) {
+              const val = parseFloat(finalPosition.right as string);
+              finalPosition.right = `${Math.max(2, val - 22)}%`;
+            }
+          }
 
-      {/* L1: SYSTEM: ONLINE pill */}
-      <div ref={(el) => { floatersRef.current[0] = el; }} data-depth="1.5"
-        style={{ position: 'absolute', top: '28%', left: '2%', zIndex: 3, willChange: 'transform, filter' }}>
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: '0.4rem',
-          padding: '0.62rem 1.3rem', borderRadius: '999px',
-          border: `1.5px solid ${colorScheme.borderStrong}`,
-          fontFamily: "'Quicksand', sans-serif", fontSize: '0.66rem', fontWeight: 700, letterSpacing: '0.08em',
-          color: colorScheme.text, background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(4px)',
-        }}>
-          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: colorScheme.primary1, boxShadow: `0 0 8px ${colorScheme.primary1}` }} />
-          SYSTEM: ONLINE
-        </div>
-      </div>
-
-      {/* R1: #Nerd_Aesthetics pill — pink filled */}
-      <div ref={(el) => { floatersRef.current[1] = el; }} data-depth="3.5"
-        style={{ position: 'absolute', bottom: '38%', right: '2%', zIndex: 4, willChange: 'transform, filter' }}>
-        <div style={{
-          padding: '0.78rem 1.7rem', borderRadius: '999px',
-          fontFamily: "'Nunito', sans-serif", fontSize: '0.88rem',
-          fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase',
-          color: '#fff', background: colorScheme.third1,
-          boxShadow: `0 8px 28px ${colorScheme.third3}`,
-        }}>
-          #Nerd_Aesthetics
-        </div>
-      </div>
-
-      {/* R2: small ✦ */}
-      <div ref={(el) => { floatersRef.current[2] = el; }} data-depth="-2.5"
-        style={{ position: 'absolute', top: '12%', right: '6%', zIndex: 1, willChange: 'transform, filter',
-          fontFamily: "'Nunito', sans-serif", fontSize: '1.3rem', fontWeight: 300, color: colorScheme.textDim }}>
-        ✦
-      </div>
-
-      {/* L2: vertical coords text */}
-      <div ref={(el) => { floatersRef.current[3] = el; }} data-depth="-1"
-        style={{
-          position: 'absolute', bottom: '48%', left: '0.5%', zIndex: 1, willChange: 'transform, filter',
-          fontFamily: 'monospace', fontSize: '0.48rem', color: colorScheme.textMuted, opacity: 0.6,
-          writingMode: 'vertical-rl', transform: 'rotate(180deg)', letterSpacing: '0.25em',
-        }}>
-        LAT: 37.5665 · LON: 126.9780
-      </div>
-
-      {/* BG: big outline circle */}
-      <div ref={(el) => { floatersRef.current[4] = el; }} data-depth="-4"
-        style={{
-          position: 'absolute', top: '-15%', right: '-8%', zIndex: 0,
-          width: '420px', height: '420px', borderRadius: '50%',
-          border: `1px solid ${colorScheme.border}`, opacity: 0.5, pointerEvents: 'none',
-          willChange: 'transform, filter',
-        }} />
-
-      {/* R3: 創造的エンジニア pill — mint bordered */}
-      <div ref={(el) => { floatersRef.current[5] = el; }} data-depth="2"
-        style={{ position: 'absolute', top: '20%', right: '2%', zIndex: 2, willChange: 'transform, filter' }}>
-        <div style={{
-          padding: '0.64rem 1.35rem', borderRadius: '999px',
-          border: `1.5px solid ${colorScheme.primary1}`,
-          fontFamily: "'Quicksand', sans-serif", fontSize: '0.68rem',
-          fontWeight: 700, color: colorScheme.primary2, background: colorScheme.bgAlt,
-          boxShadow: `0 4px 12px ${colorScheme.primary3}`,
-        }}>
-          創造的エンジニア
-        </div>
-      </div>
-
-      {/* R4: medium ✦ mint */}
-      <div ref={(el) => { floatersRef.current[6] = el; }} data-depth="5"
-        style={{ position: 'absolute', top: '52%', right: '4%', zIndex: 5, willChange: 'transform, filter',
-          fontFamily: "'Nunito', sans-serif", fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 300, color: colorScheme.primary2, opacity: 0.8 }}>
-        ✦
-      </div>
-
-      {/* L3: クリエイター pill — dark bordered */}
-      <div ref={(el) => { floatersRef.current[7] = el; }} data-depth="-3"
-        style={{ position: 'absolute', bottom: '30%', left: '1.5%', zIndex: 1, willChange: 'transform, filter' }}>
-        <div style={{
-          padding: '0.62rem 1.35rem', borderRadius: '999px',
-          border: `1.5px solid ${colorScheme.borderStrong}`,
-          fontFamily: "'Quicksand', sans-serif", fontSize: '0.68rem', fontWeight: 700,
-          letterSpacing: '0.05em', color: colorScheme.textMuted, background: colorScheme.bgAlt,
-        }}>
-          クリエイター // VER.01
-        </div>
-      </div>
-
-      {/* L4: big ✦ pink */}
-      <div ref={(el) => { floatersRef.current[8] = el; }} data-depth="2.5"
-        style={{ position: 'absolute', top: '8%', left: '4%', zIndex: 4, willChange: 'transform, filter',
-          fontFamily: "'Nunito', sans-serif", fontSize: 'clamp(3rem, 7vw, 5rem)', fontWeight: 300, color: colorScheme.third1 }}>
-        ✦
-      </div>
-
-      {/* R5: big ✦ mint bottom */}
-      <div ref={(el) => { floatersRef.current[9] = el; }} data-depth="-3"
-        style={{ position: 'absolute', bottom: '10%', right: '3%', zIndex: 2, willChange: 'transform, filter',
-          fontFamily: "'Nunito', sans-serif", fontSize: 'clamp(3rem, 7vw, 5rem)', fontWeight: 300, color: colorScheme.primary2, opacity: 0.8 }}>
-        ✦
-      </div>
-
-      {/* L5: medium ✦ dim */}
-      <div ref={(el) => { floatersRef.current[10] = el; }} data-depth="4"
-        style={{ position: 'absolute', bottom: '14%', left: '7%', zIndex: 5, willChange: 'transform, filter',
-          fontFamily: "'Nunito', sans-serif", fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 300, color: colorScheme.textDim, opacity: 0.7 }}>
-        ✦
-      </div>
-
-      {/* L6: tiny ✦ */}
-      <div ref={(el) => { floatersRef.current[11] = el; }} data-depth="-1.5"
-        style={{ position: 'absolute', top: '44%', left: '3%', zIndex: 1, willChange: 'transform, filter',
-          fontFamily: "'Nunito', sans-serif", fontSize: '1rem', fontWeight: 300, color: colorScheme.textDim, opacity: 0.35 }}>
-        ✦
-      </div>
-
-      {/* R6: small ✦ mint upper */}
-      <div ref={(el) => { floatersRef.current[12] = el; }} data-depth="3"
-        style={{ position: 'absolute', top: '34%', right: '2%', zIndex: 4, willChange: 'transform, filter',
-          fontFamily: "'Nunito', sans-serif", fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', fontWeight: 300, color: colorScheme.primary1, opacity: 0.65 }}>
-        ✦
-      </div>
-
-      {/* L7: WARNING pill — pink dashed */}
-      <div ref={(el) => { floatersRef.current[13] = el; }} data-depth="-5"
-        style={{ position: 'absolute', top: '38%', left: '2%', zIndex: 2, willChange: 'transform, filter' }}>
-        <div style={{
-          padding: '0.56rem 1.1rem', borderRadius: '999px',
-          border: `1.5px dashed ${colorScheme.third1}`,
-          fontFamily: "'Quicksand', sans-serif", fontSize: '0.62rem',
-          fontWeight: 800, letterSpacing: '0.1em', color: colorScheme.third2,
-        }}>
-          WARNING // OVERLOAD
-        </div>
-      </div>
-
-      {/* R7: AESTHETIC.EXE pill — dark filled */}
-      <div ref={(el) => { floatersRef.current[14] = el; }} data-depth="4.5"
-        style={{ position: 'absolute', bottom: '24%', right: '2%', zIndex: 5, willChange: 'transform, filter' }}>
-        <div style={{
-          padding: '0.64rem 1.3rem', borderRadius: '999px',
-          background: colorScheme.secondary1,
-          fontFamily: "'Nunito', sans-serif", fontSize: '0.74rem',
-          fontWeight: 800, letterSpacing: '0.1em', color: colorScheme.bg,
-        }}>
-          AESTHETIC.EXE
-        </div>
-      </div>
-
-      {/* L8: + mark */}
-      <div ref={(el) => { floatersRef.current[15] = el; }} data-depth="-2"
-        style={{ position: 'absolute', top: '20%', left: '5%', zIndex: 1, willChange: 'transform, filter',
-          fontFamily: "'Nunito', sans-serif", fontSize: '1.6rem', fontWeight: 300, color: colorScheme.textDim, opacity: 0.35 }}>
-        +
-      </div>
-
+          return (
+            <div
+              key={item.id}
+              ref={(el) => { floatersRef.current[index] = el; }}
+              data-depth={item.depth}
+              style={{
+                position: 'absolute',
+                ...finalPosition,
+                zIndex: item.zIndex !== undefined ? item.zIndex : 2,
+                willChange: 'transform, filter',
+                transform: 'translateZ(0)',
+              }}
+            >
+              <HeroChip
+                variant={item.variant}
+                text={item.text}
+                colorProps={item.colorProps}
+                fontSize={item.fontSize} // REVERTED: Do not reduce font size on mobile
+                opacity={item.opacity}
+                style={item.variant === 'circle' ? { opacity: item.opacity || 0.5 } : {}}
+              />
+            </div>
+          );
+        })}
       {/* Corner labels */}
       <span style={{
         position: 'absolute', top: '1.2rem', right: '1.2rem', zIndex: 5,
@@ -429,7 +361,7 @@ const HeroPoster: React.FC = () => {
         position: 'absolute', top: '1.2rem', left: '1.2rem', zIndex: 5,
         fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.08em',
         color: colorScheme.text, fontFamily: "'Quicksand', sans-serif",
-      }}>Sonagii_</span>
+      }}>Yonghyuk Choi</span>
     </section>
   );
 };
