@@ -1,4 +1,5 @@
 import { experiences } from "../../data/experienceData"; // 데이터 경로 확인!
+import { getLocalizedText } from "../../data/i18n";
 
 const Experience = () => {
   return (
@@ -28,7 +29,7 @@ const Experience = () => {
             </h4>
 
             <p className="text-gray-300 leading-relaxed text-lg font-light max-w-3xl">
-              {exp.description}
+              {getLocalizedText(exp.description, "kr")}
             </p>
 
             {/* (선택사항) 호버 시 살짝 빛나는 배경 효과 */}

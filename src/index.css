@@ -106,10 +106,6 @@ img {
     font-size: clamp(3rem, 14vw, 5rem) !important;
   }
 
-  .hero-char-wrap {
-    max-width: 600px !important;
-  }
-
   .hero-subtitle {
     font-size: 0.6rem !important;
     letter-spacing: 0.1em !important;
@@ -139,10 +135,6 @@ img {
 
   .hero-title {
     font-size: clamp(2.5rem, 16vw, 4rem) !important;
-  }
-
-  .hero-char-wrap {
-    max-width: 450px !important;
   }
 
   .hero-subtitle {

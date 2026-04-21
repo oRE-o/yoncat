@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { projects } from "../data/projectData"; // 데이터 파일 경로 확인!
+import { getLocalizedText } from "../data/i18n";
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -100,7 +101,7 @@ const ProjectDetail = () => {
               Overview
             </h3>
             <p className="text-gray-300 leading-relaxed text-lg whitespace-pre-line font-light">
-              {project.description}
+              {getLocalizedText(project.description, "kr")}
             </p>
           </div>
           <div>

@@ -2,23 +2,35 @@
 import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { colorScheme } from '../design/colorScheme';
+import { getThemeScheme, type AppTheme, type ThemeScheme } from '../design/themeSchemes';
 import { projects } from '../data/projectData';
+import { getLocalizedText, type LanguageCode } from '../data/i18n';
+import {
+  projectShowcaseCopy,
+  type ProjectFilterKey,
+} from '../data/projectShowcaseCopy';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const CATEGORY_COLORS: Record<string, string> = {
-  Game: colorScheme.game,
-  Services: colorScheme.services,
-  Engineering: colorScheme.engineering,
+const categoryColor = (scheme: ThemeScheme, category: string) => {
+  if (category === 'Game') return scheme.game;
+  if (category === 'Services') return scheme.services;
+  return scheme.engineering;
 };
 
-const ProjectShowcase = () => {
+type ProjectShowcaseProps = {
+  theme: AppTheme;
+  language: LanguageCode;
+};
+
+const filters: ProjectFilterKey[] = ['All', 'Game', 'Services', 'Engineering'];
+
+const ProjectShowcase = ({ theme, language }: ProjectShowcaseProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
-  const [activeFilter, setActiveFilter] = useState<string>('All');
-  const filters = ['All', 'Game', 'Services', 'Engineering'];
+  const [activeFilter, setActiveFilter] = useState<ProjectFilterKey>('All');
+  const scheme = getThemeScheme(theme);
 
   const filtered =
     activeFilter === 'All'
@@ -68,7 +80,7 @@ const ProjectShowcase = () => {
       id="project-showcase"
       style={{
         padding: 'clamp(4rem, 10vh, 7rem) clamp(1.5rem, 5vw, 4rem)',
-        background: colorScheme.bg,
+        background: scheme.bg,
         position: 'relative',
       }}
     >
@@ -80,7 +92,7 @@ const ProjectShowcase = () => {
             fontSize: 'clamp(2.5rem, 6vw, 4rem)',
             fontWeight: 700,
             letterSpacing: '-0.02em',
-            color: colorScheme.primary1,
+            color: scheme.primary1,
             marginBottom: '0.3rem',
             lineHeight: 1,
           }}
@@ -90,13 +102,12 @@ const ProjectShowcase = () => {
         <p style={{
           fontSize: '0.75rem', fontWeight: 600,
           letterSpacing: '0.2em', textTransform: 'uppercase' as const,
-          color: colorScheme.textDim, marginBottom: '1.8rem',
+          color: scheme.textDim, marginBottom: '1.8rem',
           fontFamily: "'Quicksand', sans-serif",
         }}>
-          Selected works
+          {projectShowcaseCopy.subtitle}
         </p>
 
-        {/* Filter pills */}
         <div style={{
           display: 'flex', gap: '0.45rem',
           flexWrap: 'wrap', marginBottom: '1.5rem',
@@ -112,22 +123,21 @@ const ProjectShowcase = () => {
                   fontSize: '0.72rem', fontWeight: 700,
                   letterSpacing: '0.08em', textTransform: 'uppercase' as const,
                   fontFamily: "'Quicksand', sans-serif",
-                  color: isActive ? '#fff' : colorScheme.textMuted,
-                  background: isActive ? colorScheme.primary1 : colorScheme.bgPanel,
-                  border: `1.5px solid ${isActive ? colorScheme.primary1 : colorScheme.border}`,
+                  color: isActive ? '#fff' : scheme.textMuted,
+                  background: isActive ? scheme.primary1 : scheme.bgPanel,
+                  border: `1.5px solid ${isActive ? scheme.primary1 : scheme.border}`,
                   borderRadius: '100px',
                   cursor: 'pointer',
                   transition: 'all 0.3s ease',
-                  boxShadow: isActive ? colorScheme.shadow : 'none',
+                  boxShadow: isActive ? scheme.shadow : 'none',
                 }}
               >
-                {f}
+                {projectShowcaseCopy.filters[f]}
               </button>
             );
           })}
         </div>
 
-        {/* Grid */}
         <div
           ref={gridRef}
           className="project-grid"
@@ -138,7 +148,12 @@ const ProjectShowcase = () => {
           }}
         >
           {filtered.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+              scheme={scheme}
+              language={language}
+            />
           ))}
         </div>
       </div>
@@ -146,18 +161,26 @@ const ProjectShowcase = () => {
   );
 };
 
-const ProjectCard = ({ project }: { project: (typeof projects)[number] }) => {
+const ProjectCard = ({
+  project,
+  scheme,
+  language,
+}: {
+  project: (typeof projects)[number];
+  scheme: ThemeScheme;
+  language: LanguageCode;
+}) => {
   const [hovered, setHovered] = useState(false);
-  const catColor = CATEGORY_COLORS[project.category] || colorScheme.primary1;
+  const catColor = categoryColor(scheme, project.category);
 
   return (
     <div
       style={{
         borderRadius: '18px',
         overflow: 'hidden',
-        background: colorScheme.bgPanel,
-        border: `1.5px solid ${hovered ? colorScheme.primary1 : colorScheme.border}`,
-        boxShadow: hovered ? colorScheme.shadowStrong : colorScheme.shadow,
+        background: scheme.bgPanel,
+        border: `1.5px solid ${hovered ? scheme.primary1 : scheme.border}`,
+        boxShadow: hovered ? scheme.shadowStrong : scheme.shadow,
         transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
         transform: hovered ? 'translateY(-6px)' : 'translateY(0)',
         cursor: 'default',
@@ -195,12 +218,12 @@ const ProjectCard = ({ project }: { project: (typeof projects)[number] }) => {
           borderRadius: '100px',
           backdropFilter: 'blur(8px)',
         }}>
-          {project.category}
+          {projectShowcaseCopy.filters[project.category]}
         </span>
         <span style={{
           position: 'absolute', top: '0.7rem', right: '0.7rem',
           fontSize: '0.58rem', fontWeight: 700,
-          color: colorScheme.textDim, letterSpacing: '0.08em',
+          color: scheme.textDim, letterSpacing: '0.08em',
           fontFamily: "'Quicksand', sans-serif",
         }}>
           {project.year}
@@ -211,25 +234,24 @@ const ProjectCard = ({ project }: { project: (typeof projects)[number] }) => {
         <h3 style={{
           fontFamily: "'Quicksand', sans-serif",
           fontSize: '1.05rem', fontWeight: 700,
-          color: colorScheme.text, marginBottom: '0.15rem',
+          color: scheme.text, marginBottom: '0.15rem',
         }}>
           {project.title}
         </h3>
         <p style={{
           fontSize: '0.72rem', fontWeight: 600,
-          color: colorScheme.textMuted, marginBottom: '0.5rem',
+          color: scheme.textMuted, marginBottom: '0.5rem',
           fontFamily: "'Nunito', sans-serif",
         }}>
           {project.role}
         </p>
 
-        {/* Description — always visible, no hover animation */}
         <p style={{
           fontSize: '0.7rem', fontWeight: 500,
-          lineHeight: 1.7, color: colorScheme.textMuted,
+          lineHeight: 1.7, color: scheme.textMuted,
           marginBottom: '0.5rem', fontFamily: "'Nunito', sans-serif",
         }}>
-          {project.description.split('\n')[0]}
+          {getLocalizedText(project.description, language).split('\n')[0]}
         </p>
 
         <div style={{
@@ -239,8 +261,8 @@ const ProjectCard = ({ project }: { project: (typeof projects)[number] }) => {
             <span key={tag} style={{
               padding: '0.18rem 0.5rem',
               fontSize: '0.58rem', fontWeight: 700,
-              color: colorScheme.textMuted,
-              background: colorScheme.surface,
+              color: scheme.textMuted,
+              background: scheme.surface,
               borderRadius: '8px',
               fontFamily: "'Quicksand', sans-serif",
             }}>
@@ -253,7 +275,7 @@ const ProjectCard = ({ project }: { project: (typeof projects)[number] }) => {
           <div style={{
             display: 'flex', gap: '0.6rem', marginTop: '0.6rem',
             paddingTop: '0.6rem',
-            borderTop: `1px solid ${colorScheme.border}`,
+            borderTop: `1px solid ${scheme.border}`,
           }}>
             {project.links.map((link) => (
               <a
@@ -263,7 +285,7 @@ const ProjectCard = ({ project }: { project: (typeof projects)[number] }) => {
                 rel="noopener noreferrer"
                 style={{
                   fontSize: '0.68rem', fontWeight: 700,
-                  color: colorScheme.primary1, textDecoration: 'none',
+                  color: scheme.primary1, textDecoration: 'none',
                   display: 'flex', alignItems: 'center', gap: '0.3rem',
                   transition: 'opacity 0.2s',
                   fontFamily: "'Quicksand', sans-serif",

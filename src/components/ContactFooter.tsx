@@ -2,14 +2,22 @@
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { colorScheme } from '../design/colorScheme';
+import { getThemeScheme, type AppTheme } from '../design/themeSchemes';
 import { contactData } from '../data/contactData';
+import { type LanguageCode } from '../data/i18n';
+import { contactCopy } from '../data/introData';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ContactFooter = () => {
+type ContactFooterProps = {
+  theme: AppTheme;
+  language?: LanguageCode;
+};
+
+const ContactFooter = ({ theme }: ContactFooterProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const scheme = getThemeScheme(theme);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -38,7 +46,7 @@ const ContactFooter = () => {
       id="contact-footer"
       style={{
         padding: 'clamp(4rem, 12vh, 7rem) clamp(1.5rem, 5vw, 4rem)',
-        background: colorScheme.bgHero,
+        background: scheme.bgHero,
         position: 'relative',
       }}
     >
@@ -55,16 +63,28 @@ const ContactFooter = () => {
           fontFamily: "'Quicksand', sans-serif",
           fontSize: 'clamp(2rem, 5vw, 3.5rem)',
           fontWeight: 700, letterSpacing: '-0.02em',
-          color: colorScheme.text, lineHeight: 1.1,
+          color: scheme.text, lineHeight: 1.1,
         }}>
-          Let's Connect<span style={{ color: colorScheme.third1 }}>!</span>
+          {contactCopy.title}
+          <span style={{ color: scheme.third1 }}>!</span>
         </h2>
+
+        <p style={{
+          fontSize: '0.85rem',
+          fontWeight: 500,
+          color: scheme.textMuted,
+          fontFamily: "'Nunito', sans-serif",
+          maxWidth: '36rem',
+          lineHeight: 1.7,
+        }}>
+          {contactCopy.subtitle}
+        </p>
 
         <a
           href={`mailto:${contactData.email}`}
           style={{
             fontSize: 'clamp(0.85rem, 1.8vw, 1.1rem)',
-            color: colorScheme.third1, textDecoration: 'none',
+            color: scheme.third1, textDecoration: 'none',
             fontWeight: 700, letterSpacing: '0.02em',
             fontFamily: "'Quicksand', sans-serif",
             transition: 'opacity 0.3s',
@@ -87,23 +107,21 @@ const ContactFooter = () => {
                 padding: '0.55rem 1.1rem',
                 fontSize: '0.78rem', fontWeight: 700,
                 fontFamily: "'Quicksand', sans-serif",
-                color: colorScheme.text,
-                background: colorScheme.surface,
-                border: `1.5px solid ${colorScheme.border}`,
+                color: scheme.text,
+                background: scheme.surface,
+                border: `1.5px solid ${scheme.border}`,
                 borderRadius: '100px',
                 textDecoration: 'none',
                 transition: 'all 0.3s ease',
               }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget;
-                el.style.background = colorScheme.surface;
-                el.style.borderColor = colorScheme.third1;
+                el.style.borderColor = scheme.third1;
                 el.style.transform = 'translateY(-2px)';
               }}
               onMouseLeave={(e) => {
                 const el = e.currentTarget;
-                el.style.background = colorScheme.surface;
-                el.style.borderColor = colorScheme.border;
+                el.style.borderColor = scheme.border;
                 el.style.transform = 'translateY(0)';
               }}
             >
@@ -115,7 +133,7 @@ const ContactFooter = () => {
 
         <div style={{
           marginTop: '2.5rem', paddingTop: '1.2rem',
-          borderTop: `1px solid ${colorScheme.border}`,
+          borderTop: `1px solid ${scheme.border}`,
           width: '100%',
           display: 'flex', justifyContent: 'space-between',
           alignItems: 'center', flexWrap: 'wrap', gap: '1rem',
@@ -123,7 +141,7 @@ const ContactFooter = () => {
           <span style={{
             fontSize: '0.55rem', fontWeight: 700,
             letterSpacing: '0.2em', textTransform: 'uppercase' as const,
-            color: colorScheme.textDim,
+            color: scheme.textDim,
             fontFamily: "'Quicksand', sans-serif",
           }}>
             ARCHIVE—001 // SONAGII_
@@ -131,10 +149,10 @@ const ContactFooter = () => {
           <span style={{
             fontSize: '0.55rem', fontWeight: 600,
             letterSpacing: '0.12em', textTransform: 'uppercase' as const,
-            color: colorScheme.textDim,
+            color: scheme.textDim,
             fontFamily: "'Nunito', sans-serif",
           }}>
-            © 2026 Sonagii_. All rights reserved.
+            {contactData.footerRights}
           </span>
         </div>
       </div>
