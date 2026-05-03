@@ -111,10 +111,12 @@ const IntroSection = ({ language, theme, onSectionSelect }: IntroSectionProps) =
                   lineHeight: 1.85,
                   color: scheme.textMuted,
                   fontFamily: paragraphFont,
-                  // keep-all stops breaks inside CJK phrases; normal overflow-wrap keeps
-                  // "break-word" from chopping words when a line is tight.
+                  // keep-all keeps Korean/Japanese eojeol/phrases together; combined with
+                  // greedy line-break this orphans the last short word, so we hand wrapping
+                  // to the browser's pretty algorithm to redistribute and avoid widows.
                   wordBreak: language === 'en' ? 'normal' : 'keep-all',
-                  overflowWrap: 'normal',
+                  overflowWrap: 'anywhere',
+                  textWrap: 'pretty',
                 }}
               >
                 {paragraph}

@@ -28,6 +28,11 @@ const TimelineItem = ({
   language: LanguageCode;
 }) => {
   const description = getLocalizedText(exp.description, language);
+  const bodyFont =
+    language === 'jp'
+      ? "'M PLUS Rounded 1c', 'Nunito', sans-serif"
+      : "'Nunito', sans-serif";
+  const wordBreak = language === 'en' ? 'normal' : ('keep-all' as const);
   return (
     <div
       style={{
@@ -74,6 +79,10 @@ const TimelineItem = ({
       <div
         style={{
           flex: 1,
+          // Without min-width:0 a flex item refuses to shrink below its intrinsic
+          // content size; mixed-script JP/KR descriptions then push the row off-screen
+          // on narrow viewports.
+          minWidth: 0,
           paddingBottom: isLast ? '0' : '1.8rem',
         }}
       >
@@ -103,6 +112,8 @@ const TimelineItem = ({
             color: scheme.text,
             lineHeight: 1.3,
             marginBottom: '0.1rem',
+            wordBreak,
+            overflowWrap: 'anywhere',
           }}
         >
           {exp.company}
@@ -112,8 +123,10 @@ const TimelineItem = ({
             fontSize: '0.78rem',
             fontWeight: 600,
             color: scheme.textMuted,
-            fontFamily: "'Nunito', sans-serif",
+            fontFamily: bodyFont,
             marginBottom: '0.35rem',
+            wordBreak,
+            overflowWrap: 'anywhere',
           }}
         >
           {exp.role}
@@ -125,7 +138,10 @@ const TimelineItem = ({
             fontWeight: 500,
             lineHeight: 1.7,
             color: scheme.textMuted,
-            fontFamily: "'Nunito', sans-serif",
+            fontFamily: bodyFont,
+            wordBreak,
+            overflowWrap: 'anywhere',
+            textWrap: 'pretty',
           }}
         >
           {description}

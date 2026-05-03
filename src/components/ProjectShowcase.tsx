@@ -172,6 +172,11 @@ const ProjectCard = ({
 }) => {
   const [hovered, setHovered] = useState(false);
   const catColor = categoryColor(scheme, project.category);
+  const bodyFont =
+    language === 'jp'
+      ? "'M PLUS Rounded 1c', 'Nunito', sans-serif"
+      : "'Nunito', sans-serif";
+  const wordBreak = language === 'en' ? 'normal' : ('keep-all' as const);
 
   return (
     <div
@@ -184,6 +189,7 @@ const ProjectCard = ({
         transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
         transform: hovered ? 'translateY(-6px)' : 'translateY(0)',
         cursor: 'default',
+        minWidth: 0,
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -230,18 +236,22 @@ const ProjectCard = ({
         </span>
       </div>
 
-      <div style={{ padding: '1.1rem' }}>
+      <div style={{ padding: '1.1rem', minWidth: 0 }}>
         <h3 style={{
           fontFamily: "'Quicksand', sans-serif",
           fontSize: '1.05rem', fontWeight: 700,
           color: scheme.text, marginBottom: '0.15rem',
+          wordBreak,
+          overflowWrap: 'anywhere',
         }}>
           {project.title}
         </h3>
         <p style={{
           fontSize: '0.72rem', fontWeight: 600,
           color: scheme.textMuted, marginBottom: '0.5rem',
-          fontFamily: "'Nunito', sans-serif",
+          fontFamily: bodyFont,
+          wordBreak,
+          overflowWrap: 'anywhere',
         }}>
           {project.role}
         </p>
@@ -249,7 +259,10 @@ const ProjectCard = ({
         <p style={{
           fontSize: '0.7rem', fontWeight: 500,
           lineHeight: 1.7, color: scheme.textMuted,
-          marginBottom: '0.5rem', fontFamily: "'Nunito', sans-serif",
+          marginBottom: '0.5rem', fontFamily: bodyFont,
+          wordBreak,
+          overflowWrap: 'anywhere',
+          textWrap: 'pretty',
         }}>
           {getLocalizedText(project.description, language).split('\n')[0]}
         </p>
