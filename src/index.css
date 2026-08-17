@@ -17,13 +17,20 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Dark is the default look (index.html sets data-theme before paint;
+   these values mirror design/themeSchemes.ts). */
 body {
   font-family: 'Nunito', 'Quicksand', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   letter-spacing: 0;
-  background: #f8f6f0;
-  color: #1a1f24;
+  background: #0d1117;
+  color: #edf7ff;
   overflow-x: hidden;
   line-height: 1.6;
+}
+
+html[data-theme='light'] body {
+  background: #f8f6f0;
+  color: #1a1f24;
 }
 
 /* ─── Selection ─────────────────────────────────────── */
@@ -32,7 +39,12 @@ body {
   color: #1a2a2e;
 }
 
-/* ─── Hide custom scrollbar (remove purple scrollbar) ─ */
+html:not([data-theme='light']) ::selection {
+  background: rgba(117, 241, 218, 0.3);
+  color: #edf7ff;
+}
+
+/* ─── Hide custom scrollbar ─────────────────────────── */
 ::-webkit-scrollbar {
   width: 0;
   display: none;
@@ -50,16 +62,6 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 
-/* ─── Marquee Animation ─────────────────────────────── */
-@keyframes marquee-scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
 /* ─── Scroll Line Pulse ─────────────────────────────── */
 @keyframes scroll-pulse {
   0%, 100% {
@@ -75,12 +77,6 @@ h1, h2, h3, h4, h5, h6 {
 .scroll-line-animate {
   animation: scroll-pulse 2s ease-in-out infinite;
   transform-origin: top;
-}
-
-/* ─── Float animation for tags ──────────────────────── */
-@keyframes float-gentle {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
 }
 
 /* ─── Link Reset ────────────────────────────────────── */
@@ -117,10 +113,6 @@ img {
 
   .hero-corner-name {
     display: none !important;
-  }
-
-  .about-cards {
-    grid-template-columns: 1fr !important;
   }
 
   .project-grid {

@@ -53,8 +53,8 @@ export const projects: Project[] = [
     description: {
       kr:
         "키보드 넘패드와 마우스를 동시에 사용하는 복합 입력 기반 리듬 액션 게임입니다.\n" +
-        "사용자가 즉시 읽을 수 있도록 가독성과 심미성을 동시에 만족하는 UI를 설계·개선하는 일을 맡고 있으며,\n" +
-        "전용 물리 컨트롤러의 PCB 설계와 실물 제작, 행사 출품용 홍보물·디자인 검수까지 함께 담당합니다.\n" +
+        "사용자가 즉시 읽을 수 있도록 가독성과 심미성을 동시에 만족하는 UI를 설계/개선하는 일을 맡고 있으며,\n" +
+        "전용 물리 컨트롤러의 PCB 설계와 실물 제작, 행사 출품용 홍보물/디자인 검수까지 함께 담당합니다.\n" +
         "Nexon Dream Members 출전을 거쳐 2026년 PlayX4 참가를 준비 중인, 동아리 출시 목표 프로젝트입니다.",
       en:
         "A rhythm-action game that asks the player to play with a numpad and a mouse at the same time, treating the two devices as one composite input surface.\n" +
@@ -79,7 +79,7 @@ export const projects: Project[] = [
     description: {
       kr:
         "주인공이 다양한 일과 투자수단을 통해 돈을 벌어나가는 시뮬레이션 타이쿤 게임입니다.\n" +
-        "2인 팀에서 PM·기획·클라이언트 개발을 맡고 있으며, 기획과 총괄에 좀 더 무게를 둔 프로젝트로 진행하고 있습니다.\n" +
+        "2인 팀에서 PM, 기획, 클라이언트 개발을 맡고 있으며, 기획과 총괄에 좀 더 무게를 둔 프로젝트로 진행하고 있습니다.\n" +
         "현재는 스토리의 큰 줄기를 어느 정도 잡아둔 상태에서 본격적인 UI와 핵심 게임 로직을 만들어 나가는 단계입니다.",
       en:
         "A simulation tycoon where the protagonist grinds through different jobs and investment tools to build wealth.\n" +
@@ -127,8 +127,8 @@ export const projects: Project[] = [
     description: {
       kr:
         "KRAFTON 산하 5minlab 인턴십 기간 동안 개발에 참여한 언리얼 엔진 기반 탑뷰 시뮬레이션 게임입니다.\n" +
-        "Unreal Engine·C++·JS/TS 환경에서 다량 파티클의 최적화와 성능 분석을 진행하고, 맵 로딩 시점의 최적화와 맵 버그를 수정해 전체 퍼포먼스를 끌어올렸습니다.\n" +
-        "병행해 <Smash Legends>의 서버·AWS 관련 작업도 보조하며 라이브 서비스 운영 흐름을 가까이서 학습했습니다.",
+        "Unreal Engine, C++, JS/TS 환경에서 다량 파티클의 최적화와 성능 분석을 진행하고, 맵 로딩 시점의 최적화와 맵 버그를 수정해 전체 퍼포먼스를 끌어올렸습니다.\n" +
+        "병행해 <Smash Legends>의 서버/AWS 관련 작업도 보조하며 라이브 서비스 운영 흐름을 가까이서 학습했습니다.",
       en:
         "An Unreal-based top-down simulation game I contributed to during my internship at 5minlab (KRAFTON).\n" +
         "Worked across Unreal Engine, C++, and JS/TS on large-scale particle optimization and profiling, plus map-loading performance and map-bug fixes that lifted overall runtime.\n" +
@@ -182,7 +182,7 @@ export const projects: Project[] = [
     description: {
       kr:
         "KAIST 구성원 3,900여 명이 사용하는 택시 동승 매칭 서비스 'Taxi'의 프론트엔드 개발을 담당하고 있습니다.\n" +
-        "TypeScript·React·Express 기반의 코드베이스 위에서 동승 서비스가 만들어 낸 절약 효과를 시각화하는 'Taxi Statistics' 기능을 직접 기획·디자인·개발했고,\n" +
+        "TypeScript, React, Express 기반의 코드베이스 위에서 동승 서비스가 만들어 낸 절약 효과를 시각화하는 'Taxi Statistics' 기능을 직접 기획, 디자인, 개발했고,\n" +
         "이 결과물로 토스뱅크 X SPARCS 해커톤에서 1위를 수상했습니다. 이외에도 이벤트 페이지와 다양한 사용자 편의 기능을 함께 개발하고 있습니다.",
       en:
         "Frontend developer on 'Taxi', the ride-sharing matcher used by 3,900+ KAIST members, on a TypeScript / React / Express stack.\n" +
@@ -210,7 +210,7 @@ export const projects: Project[] = [
     description: {
       kr:
         "KAIST 학부 동아리연합회 통합 플랫폼 'Clubs'의 백엔드 개발에 참여했습니다.\n" +
-        "TypeScript·NestJS·MySQL·drizzleORM·Zod 환경에서 동아리연합회 의결기구 회의의 공지·안건지 작성/조회·투표 기능과 동아리 회원 등록 신청 API를 설계·구현했습니다.\n" +
+        "TypeScript, NestJS, MySQL, drizzleORM, Zod 환경에서 동아리연합회 의결기구 회의의 공지, 안건지 작성/조회, 투표 기능과 동아리 회원 등록 신청 API를 설계/구현했습니다.\n" +
         "프론트엔드와 긴밀하게 소통하며 DB 스키마부터 API까지 함께 만들었고, 많은 학생들이 사용하는 실서비스 위에서 협업과 안정성에 대한 감각을 키운 시기입니다.",
       en:
         "Contributed to the backend of 'Clubs', KAIST's unified undergraduate club federation platform.\n" +
@@ -237,8 +237,8 @@ export const projects: Project[] = [
     description: {
       kr:
         "전국게임개발동아리연합 UNIDEV의 3rd UNICON(2025.11.01) 행사에서 사용된 팔찌 기반 투표 시스템입니다.\n" +
-        "행사팀의 Tech Lead로서 시스템 설계와 제작, 행사 당일 운영 그리고 투표 데이터 분석·시상대 전달까지 총괄했습니다.\n" +
-        "행사 종료 후에는 차기 운영진이 그대로 이어 쓸 수 있도록 리디자인·문서화·기능 패치를 이어가며 재사용 가능한 사내 도구로 다듬고 있습니다.",
+        "행사팀의 Tech Lead로서 시스템 설계와 제작, 행사 당일 운영 그리고 투표 데이터 분석, 시상대 전달까지 총괄했습니다.\n" +
+        "행사 종료 후에는 차기 운영진이 그대로 이어 쓸 수 있도록 리디자인, 문서화, 기능 패치를 이어가며 재사용 가능한 사내 도구로 다듬고 있습니다.",
       en:
         "A wristband-based voting system used at UNIDEV's 3rd UNICON (Nov 1, 2025), the national university game-dev showcase.\n" +
         "As the Tech Lead, I owned the design, fabrication, day-of operation, and the data pipeline that ultimately fed the awards ceremony.\n" +
@@ -264,7 +264,7 @@ export const projects: Project[] = [
     description: {
       kr:
         "'학생들의 만남을 만들어주는 서비스'라는 아이디어에서 출발한 개인 프로젝트입니다.\n" +
-        "JavaScript·Express·React·MySQL+Prisma 스택으로 다양한 종류의 만남(파티)을 생성하고, 장소·시간·연락처를 공유해 커뮤니티를 형성할 수 있는 매칭 플랫폼으로 기획했습니다.\n" +
+        "JavaScript, Express, React, MySQL+Prisma 스택으로 다양한 종류의 만남(파티)을 생성하고, 장소, 시간, 연락처를 공유해 커뮤니티를 형성할 수 있는 매칭 플랫폼으로 기획했습니다.\n" +
         "디자인부터 DB 설계, FE/BE 개발까지 1인으로 끝내며 웹 서비스의 전체 흐름을 손에 익힌 첫 풀스택 프로젝트입니다.",
       en:
         "A solo project that started from one idea: a service that helps students actually meet up.\n" +
@@ -314,8 +314,8 @@ export const projects: Project[] = [
     description: {
       kr:
         "고등학교에서 3년간 진행한 자율 연구 프로젝트입니다.\n" +
-        "기존 수어 인식 모델이 손의 특징점만으로 단어를 분석해 수지(手指) 신호에 머물러 있다는 점을 보완점으로 잡아, 표정과 같이 언어의 뉘앙스를 전달하는 비수지 신호까지 포함해 수어를 번역하는 딥러닝 모델을 직접 설계·학습시켰습니다.\n" +
-        "Python·PyTorch·OpenCV·MediaPipe 환경에서 데이터 수집부터 모델 구성·학습까지 단독으로 진행한 첫 본격적인 연구 경험입니다.",
+        "기존 수어 인식 모델이 손의 특징점만으로 단어를 분석해 수지(手指) 신호에 머물러 있다는 점을 보완점으로 잡아, 표정과 같이 언어의 뉘앙스를 전달하는 비수지 신호까지 포함해 수어를 번역하는 딥러닝 모델을 직접 설계/학습시켰습니다.\n" +
+        "Python, PyTorch, OpenCV, MediaPipe 환경에서 데이터 수집부터 모델 구성/학습까지 단독으로 진행한 첫 본격적인 연구 경험입니다.",
       en:
         "A three-year self-directed research project I ran during high school.\n" +
         "Existing sign-language recognition models leaned almost entirely on hand keypoints, which limits them to manual signs. I built a deep-learning model that also takes in non-manual signals (facial expressions and the like) — the part of sign language that carries nuance — and trained it to translate signs in that fuller context.\n" +

@@ -9,6 +9,18 @@
     <title>Sonagii_ — Interactive Poster</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script>
+      // Apply the stored theme (default: dark) before first paint to avoid a flash.
+      (function () {
+        var stored = null;
+        try {
+          stored = localStorage.getItem('yoncat-theme');
+        } catch (e) {}
+        var theme = stored === 'light' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

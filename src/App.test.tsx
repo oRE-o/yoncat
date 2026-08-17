@@ -287,7 +287,7 @@ describe("App localization flow", () => {
     expect(lenisScrollToMock).toHaveBeenCalledTimes(1);
     expect(scrollIntoViewMock).not.toHaveBeenCalled();
 
-    triggerIntersection("about-strip");
+    triggerIntersection("experience-section");
 
     await waitFor(() => {
       expect(within(getDock()).getByRole("button", { name: "경험" })).toHaveAttribute(

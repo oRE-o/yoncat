@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { fonts } from '../../design/typography';
+
 export type FloaterVariant = 'glass' | 'filled' | 'bordered' | 'dashed' | 'sparkle' | 'symbol' | 'vertical-text' | 'circle';
 
 export interface HeroChipProps {
@@ -30,7 +32,7 @@ const HeroChip: React.FC<HeroChipProps> = ({ variant, text, colorProps = {}, fon
           display: 'flex', alignItems: 'center', gap: '0.4rem',
           padding: '0.62rem 1.3rem', borderRadius: '999px',
           border: `1.5px solid ${colorProps.border || 'rgba(255,255,255,0.4)'}`,
-          fontFamily: "'Quicksand', sans-serif", fontSize: fontSize || '0.66rem', fontWeight: 700, letterSpacing: '0.08em',
+          fontFamily: fonts.display, fontSize: fontSize || '0.66rem', fontWeight: 700, letterSpacing: '0.08em',
           color: colorProps.color || '#000', 
           background: colorProps.bg || 'rgba(255, 255, 255, 0.85)', // Slightly more opaque for glass effect
           boxShadow: '0 4px 15px rgba(0,0,0,0.05)',
@@ -43,7 +45,7 @@ const HeroChip: React.FC<HeroChipProps> = ({ variant, text, colorProps = {}, fon
         <div style={{
           ...baseStyle,
           padding: '0.78rem 1.7rem', borderRadius: '999px',
-          fontFamily: "'Nunito', sans-serif", fontSize: fontSize || '0.88rem',
+          fontFamily: fonts.body, fontSize: fontSize || '0.88rem',
           fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase',
           color: colorProps.color || '#fff', background: colorProps.bg || '#000',
           boxShadow: colorProps.shadow ? `0 8px 28px ${colorProps.shadow}` : undefined,
@@ -57,7 +59,7 @@ const HeroChip: React.FC<HeroChipProps> = ({ variant, text, colorProps = {}, fon
           ...baseStyle,
           padding: '0.64rem 1.35rem', borderRadius: '999px',
           border: `1.5px solid ${colorProps.border || '#000'}`,
-          fontFamily: "'Quicksand', sans-serif", fontSize: fontSize || '0.68rem',
+          fontFamily: fonts.display, fontSize: fontSize || '0.68rem',
           fontWeight: 700, letterSpacing: '0.05em', color: colorProps.color || '#000', background: colorProps.bg || 'transparent',
           boxShadow: colorProps.shadow ? `0 4px 12px ${colorProps.shadow}` : undefined,
         }}>
@@ -70,7 +72,7 @@ const HeroChip: React.FC<HeroChipProps> = ({ variant, text, colorProps = {}, fon
           ...baseStyle,
           padding: '0.56rem 1.1rem', borderRadius: '999px',
           border: `1.5px dashed ${colorProps.border || '#000'}`,
-          fontFamily: "'Quicksand', sans-serif", fontSize: fontSize || '0.62rem',
+          fontFamily: fonts.display, fontSize: fontSize || '0.62rem',
           fontWeight: 800, letterSpacing: '0.1em', color: colorProps.color || '#000',
         }}>
           {text}
@@ -80,7 +82,7 @@ const HeroChip: React.FC<HeroChipProps> = ({ variant, text, colorProps = {}, fon
       return (
         <div style={{
           ...baseStyle,
-          fontFamily: "'Nunito', sans-serif", fontSize: fontSize || '1rem', fontWeight: 300, color: colorProps.color || '#000',
+          fontFamily: fonts.body, fontSize: fontSize || '1rem', fontWeight: 300, color: colorProps.color || '#000',
         }}>
           {text}
         </div>
@@ -89,7 +91,7 @@ const HeroChip: React.FC<HeroChipProps> = ({ variant, text, colorProps = {}, fon
       return (
         <div style={{
           ...baseStyle,
-          fontFamily: "'Nunito', sans-serif", fontSize: fontSize || '1rem', fontWeight: 300, color: colorProps.color || '#000',
+          fontFamily: fonts.body, fontSize: fontSize || '1rem', fontWeight: 300, color: colorProps.color || '#000',
         }}>
           {text}
         </div>
