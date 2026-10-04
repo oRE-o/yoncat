@@ -1,8 +1,4 @@
 /* Perspective follows the same eased pointer values as the focus effect. */
-.cover, .cover-scene { perspective: 1000px; }
-.cover-chip, .cover-spark { rotate: var(--tilt-axis-x, 1) var(--tilt-axis-y, 0) 0 var(--tilt-angle, 0deg); }
-.cover-chip { translate: calc(var(--cover-x) * -.7) calc(var(--cover-y) * -.7) calc(var(--focus-color, 0) * 32px); }
-.chip-otaku, .chip-code { translate: calc(var(--cover-x) * -.35) calc(var(--cover-y) * -.35) calc(var(--focus-color, 0) * -18px); }
 .cover-light-line { position: absolute; z-index: 1; pointer-events: none; width: 125%; height: 1px; left: -12%; top: 46%; transform: rotate(-20deg); background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--blue) 35%, transparent), transparent); }
 .cover-light-travel { position: absolute; top: 0; width: 20%; height: 2px; background: linear-gradient(90deg, transparent, var(--blue) 65%, #eeede7 95%, transparent); filter: drop-shadow(0 0 5px var(--blue)); }
 @media (max-width: 650px) { .cover-light-line { top: 43%; transform: rotate(-28deg); } }
@@ -22,3 +18,30 @@
   translate: calc(var(--cover-x) * .45) calc(var(--cover-y) * .45);
   backface-visibility: hidden;
 }
+
+/* Shared pivot, with a separate depth and motion range for each layer. */
+.cover, .cover-scene { perspective: 1100px; perspective-origin: var(--scene-center-x, 50%) var(--scene-center-y, 44%); }
+.cover .character-layer { perspective-origin: var(--scene-center-x, 50%) var(--scene-center-y, 44%); }
+.cover .cover-chip, .cover .cover-spark {
+  transform-origin: var(--orbit-x, 50%) var(--orbit-y, 50%);
+  rotate: none;
+  transform: rotateX(calc(var(--character-pitch, 0deg) * var(--orbit-strength, 1))) rotateY(calc(var(--character-yaw, 0deg) * var(--orbit-strength, 1))) rotateZ(calc(var(--character-roll, 0deg) * var(--orbit-strength, 1)));
+  translate: calc(var(--cover-x) * var(--orbit-drift, .45)) calc(var(--cover-y) * var(--orbit-drift, .45)) var(--orbit-depth, 0px);
+}
+.cover-blur-toggle { position: absolute; z-index: 8; right: 0; bottom: 28px; display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 6px 10px; border: 1px solid var(--soft-line); border-radius: 999px; background: var(--paper); color: var(--ink); font: 500 11px 'Montserrat', sans-serif; cursor: pointer; }
+.cover-blur-toggle > span { width: 5px; height: 5px; border-radius: 50%; background: var(--blue); }
+.cover-blur-toggle[aria-pressed='false'] > span { background: currentColor; opacity: .4; }
+.cover[data-blur='off'] .character-blurred, .cover[data-blur='off'] .cover-chip, .cover[data-blur='off'] .cover-spark { filter: none; }
+.cover[data-blur='off'] .character-focused { opacity: 0; }
+@media (max-width: 650px) { .cover-blur-toggle { bottom: 12px; font-size: 10px; padding-inline: 8px; gap: 5px; } }
+
+.cover .chip-otaku { --orbit-strength: .72; --orbit-drift: .15; --orbit-depth: -48px; }
+.cover .chip-code { --orbit-strength: .82; --orbit-drift: .25; --orbit-depth: -30px; }
+.cover .spark-back { --orbit-strength: .65; --orbit-drift: .1; --orbit-depth: -65px; }
+.cover .chip-github { --orbit-strength: 1.15; --orbit-drift: .9; --orbit-depth: 26px; }
+.cover .chip-draw { --orbit-strength: 1.25; --orbit-drift: 1.15; --orbit-depth: 40px; }
+.cover .spark-front { --orbit-strength: 1.35; --orbit-drift: 1.4; --orbit-depth: 54px; }
+
+/* Keep the poster interactive without native text selection or drag previews. */
+.cover, .cover * { -webkit-user-select: none; user-select: none; }
+.cover img, .cover a { -webkit-user-drag: none; }

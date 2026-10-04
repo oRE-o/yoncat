@@ -1,9 +1,10 @@
 import './HeroMotion.css';
-import { useEffect, useLayoutEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { contactData } from '../../data/contactData';
 
 export default function Cover() {
+  const [blurEnabled, setBlurEnabled] = useState(true);
   const coverRef = useRef<HTMLElement>(null);
   useLayoutEffect(() => {
     let observer: IntersectionObserver;
@@ -26,6 +27,38 @@ export default function Cover() {
     if (!cover) return;
     const art = cover.querySelector<HTMLElement>('.cover-art');
     const decorations = Array.from(cover.querySelectorAll<HTMLElement>('.cover-chip, .cover-spark')).map(element => ({ element, blur: 0, targetBlur: 0 }));
+    // Use untransformed layout coordinates so the pivot cannot drift as we rotate.
+    const layoutPosition = (element: HTMLElement) => {
+      let left = 0;
+      let top = 0;
+      let current: HTMLElement | null = element;
+      while (current && current !== cover) {
+        left += current.offsetLeft;
+        top += current.offsetTop;
+        current = current.offsetParent as HTMLElement | null;
+      }
+      return { left, top };
+    };
+    const alignPivots = () => {
+      const portrait = art?.querySelector<HTMLImageElement>('img');
+      if (!portrait || !art) return;
+      const artPosition = layoutPosition(art);
+      const centerX = artPosition.left + art.clientWidth * .5 - portrait.offsetWidth * .02;
+      const centerY = artPosition.top + portrait.offsetHeight * .26;
+      cover.style.setProperty('--scene-center-x', `${centerX}px`);
+      cover.style.setProperty('--scene-center-y', `${centerY}px`);
+      decorations.forEach(({ element }) => {
+        const position = layoutPosition(element);
+        element.style.setProperty('--orbit-x', `${centerX - position.left}px`);
+        element.style.setProperty('--orbit-y', `${centerY - position.top}px`);
+      });
+    };
+    const resize = new ResizeObserver(alignPivots);
+    resize.observe(cover);
+    const portrait = art?.querySelector<HTMLImageElement>('img');
+    if (portrait) resize.observe(portrait);
+    decorations.forEach(({ element }) => resize.observe(element));
+    alignPivots();
     let frame = 0;
     let x = 0;
     let y = 0;
@@ -45,9 +78,6 @@ export default function Cover() {
       blur += (targetBlur - blur) * .08;
       cover.style.setProperty('--cover-x', `${x}px`);
       cover.style.setProperty('--cover-y', `${y}px`);
-      cover.style.setProperty('--tilt-axis-x', `${-y || .001}`);
-      cover.style.setProperty('--tilt-axis-y', `${x}`);
-      cover.style.setProperty('--tilt-angle', `${Math.min(24, Math.hypot(x, y) * 1.35)}deg`);
       cover.style.setProperty('--character-pitch', `${-y * .85}deg`);
       cover.style.setProperty('--character-yaw', `${x * .75}deg`);
       cover.style.setProperty('--character-roll', `${x * .14}deg`);
@@ -88,6 +118,7 @@ export default function Cover() {
     cover.addEventListener('pointerleave', leave);
     cover.addEventListener('mouseleave', leave);
     return () => {
+      resize.disconnect();
       cancelAnimationFrame(frame);
       cover.removeEventListener('pointermove', move);
       cover.removeEventListener('mousemove', move);
@@ -97,7 +128,7 @@ export default function Cover() {
   }, []);
 
   return (
-    <section className="cover" id="hero-poster" ref={coverRef} aria-labelledby="cover-title">
+    <section className="cover" id="hero-poster" ref={coverRef} onDragStart={event => event.preventDefault()} data-blur={blurEnabled ? 'on' : 'off'} aria-labelledby="cover-title">
       <div className="cover-scene">
         <span className="cover-chip chip-otaku">#OTAKU</span>
         <span className="cover-chip chip-code" lang="ja">ゲーム制作</span>
@@ -112,6 +143,7 @@ export default function Cover() {
       <a className="cover-chip chip-draw" lang="ja" aria-label="お絵かき — Twitter @oreodraw" href={contactData.socials[1].url} target="_blank" rel="noopener noreferrer">お絵かき <span aria-hidden="true">↗</span></a>
       <span className="cover-spark spark-front" aria-hidden="true">✦</span>
       <h1 id="cover-title">sonagii_</h1>
+      <button className="cover-blur-toggle" type="button" aria-label="Blur effect" aria-pressed={blurEnabled} onClick={() => setBlurEnabled(value => !value)}><span aria-hidden="true" />Blur {blurEnabled ? 'on' : 'off'}</button>
     </section>
   );
 }
