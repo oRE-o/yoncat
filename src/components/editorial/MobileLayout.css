@@ -1,0 +1,81 @@
+/* A compact poster composition for touch screens. Desktop remains unchanged. */
+@media (max-width: 650px) {
+  .folio { width: calc(100% - 32px); }
+  .folio .masthead { grid-template-rows: 44px 44px; height: 96px; padding-bottom: 8px; }
+  .folio .masthead::before { height: 96px; }
+  .folio .masthead .section-navigation { display: grid; grid-template-columns: repeat(4, 1fr); width: 100%; }
+  .folio .masthead .section-navigation a { justify-content: center; min-height: 44px; padding: 0 6px; }
+  .folio .masthead .section-navigation a:first-child { margin-left: 0; }
+  .folio .masthead .page-navigation a { min-height: 44px; padding-inline: 6px; font-size: 12px; }
+  .folio .masthead .page-navigation .nav-label { gap: 7px; }
+  .folio .masthead .theme-toggle { min-width: 40px; min-height: 44px; }
+  .folio .cover { margin-top: 12px; min-height: 460px; height: min(700px, calc(100svh - 172px)); }
+  .folio .cover-scene { inset: 0 0 42px; clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%); }
+  .folio .cover-art img { height: 145%; }
+  .folio .cover h1 { left: 0; bottom: 14px; font-size: clamp(48px, 18vw, 114px); font-weight: 600; letter-spacing: -.085em; }
+  .folio .cover-blur-toggle { bottom: 12px; right: 0; min-height: 44px; padding: 6px 7px; font-size: 9px; gap: 5px; }
+  .folio .chip-github { top: 63%; left: 0; }
+  .folio .chip-draw { top: 74%; right: 0; }
+  .folio .cover-chip { font-size: 12px; min-height: 44px; padding: 9px 13px; }
+  .folio .spark-front { font-size: 44px; right: 0; top: 46%; }
+  .folio .spark-back { font-size: 42px; left: 0; top: 34%; }
+  .folio .cover-index { margin-top: 12px; }
+  .folio .cover-index > * { min-height: 44px; padding: 12px; font-size: 12px; }
+  .folio .about-section { margin-top: 48px; }
+  .folio .about-spread { display: flex; flex-direction: column; }
+  .folio .about-art { order: -1; height: 280px; min-height: 0; border: 0; border-bottom: 1px solid var(--soft-line); }
+  .folio .about-art img { height: 200%; top: -8%; }
+  .folio .about-outline { font-size: 65px; }
+  .folio .about-signature { font-size: 40px; }
+  .folio .about-text { padding: 24px 20px; gap: 24px; }
+  .folio .about-text h2 { display: flex; flex-wrap: wrap; gap: 12px; font-size: 52px; line-height: 1; }
+  .folio .about-text h2 br { display: none; }
+  .folio .about-bio { font-size: 14px; line-height: 1.85; }
+  .folio .about-bio .bio-intro { font-size: 19px; line-height: 1.6; margin-bottom: 18px; }
+  .folio .about-now { margin-block: 18px 24px; }
+  .folio .about-links { gap: 8px; }
+  .folio .about-links a { flex: 1; justify-content: center; padding-inline: 10px; font-size: 12px; }
+  .folio .experience-block { padding-top: 36px; gap: 20px; }
+  .folio .experience-year-group { grid-template-columns: 48px minmax(0, 1fr); gap: 12px; padding-bottom: 16px; }
+  .folio .experience-year { font-size: 18px; margin-top: 16px; }
+  .folio .experience-entry h5 { font-size: 18px; }
+  .folio .experience-summary { font-size: 13px; line-height: 1.75; }
+  .folio .works-section { padding-top: 48px; }
+  .folio .section-heading { gap: 12px; margin-bottom: 20px; }
+  .folio .section-heading h2 { font-size: clamp(30px, 8.5vw, 48px); }
+  .folio .work-board-row { padding: 22px 0; gap: 14px; }
+  .folio .work-board-row h3 { font-size: 21px; }
+  .folio .work-board-row h3 a { min-height: 32px; }
+  .folio .board-countdown { width: 64px; margin-top: 0; margin-bottom: 0; }
+  .folio .board-title { font-size: 20px; }
+  .folio .board-description { font-size: 14px; line-height: 1.75; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+  .folio .project-archive, .folio .project-detail { padding-top: 28px; }
+  .folio .archive-heading { gap: 10px; }
+  .folio .archive-heading h1 { font-size: 44px; }
+  .folio .archive-filters { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .folio .archive-filters button { justify-content: space-between; min-height: 44px; }
+  .folio .archive-card-cover { height: 168px; padding: 20px; }
+  .folio .archive-card-body { padding: 20px; }
+  .folio .archive-card h2 { font-size: 24px; }
+  .folio .contact { padding-top: 44px; }
+  .folio .contact-socials { gap: 18px; }
+}
+@media (max-width: 350px) {
+  .folio .about-text { padding-inline: 16px; }
+  .folio .about-text h2 { font-size: 45px; }
+  .folio .experience-year-group { grid-template-columns: 1fr; gap: 6px; }
+  .folio .experience-year { margin-top: 0; }
+  .folio .cover-blur-toggle { font-size: 8px; gap: 4px; padding-inline: 5px; }
+}
+
+@media (max-width: 650px) {
+  /* Let the entrance settle into a still poster on mobile. */
+  .folio .cover .cover-art img { transform: translateX(-50%); translate: 0 0; }
+  .folio .cover .cover-chip, .folio .cover .cover-spark { rotate: none; translate: 0 0; filter: none; }
+  .folio .cover .character-blurred { filter: none; }
+  .folio .cover .character-focused { opacity: 0; }
+  .folio .cover h1 { translate: 0 0; }
+  .folio .spark-back { left: 10%; top: 35%; font-size: 36px; }
+  .folio .spark-front { right: 10%; top: 44%; font-size: 42px; }
+  .folio .cover-blur-toggle { display: none; }
+}

@@ -1,3 +1,4 @@
+import Icon from './Icon';
 import './ArchiveMotion.css';
 import { motion, useMotionValue, useSpring, useMotionTemplate } from 'motion/react';
 import type { PointerEvent } from 'react';
@@ -40,9 +41,9 @@ export default function ArchiveCard({ project, language }: { project: Project; l
         <h2>{project.title}</h2>
         <p className="card-role">{project.role}</p>
         <p className="card-description" lang={languageTag}>{paragraphs[0]}</p>
-        <Link className="card-read-more" to={`/projects/${project.id}`}>Read more <span aria-hidden="true">↗</span></Link>
+        <Link className="card-read-more" to={`/projects/${project.id}`}>Read more <span aria-hidden="true"><Icon name="up-right" /></span></Link>
         <ul className="card-tags" aria-label="Tools and skills">{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
-        {project.links.length > 0 && <div className="card-links">{project.links.map(link => <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer">{link.name} <span aria-hidden="true">↗</span></a>)}</div>}
+        {project.links.length > 0 && <div className="card-links">{project.links.map(link => <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer">{link.name} <span aria-hidden="true"><Icon name="up-right" /></span></a>)}</div>}
       </div>
     </motion.article>
   );

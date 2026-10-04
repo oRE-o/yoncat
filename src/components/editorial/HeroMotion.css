@@ -19,15 +19,11 @@
   backface-visibility: hidden;
 }
 
-/* Shared pivot, with a separate depth and motion range for each layer. */
-.cover, .cover-scene { perspective: 1100px; perspective-origin: var(--scene-center-x, 50%) var(--scene-center-y, 44%); }
-.cover .character-layer { perspective-origin: var(--scene-center-x, 50%) var(--scene-center-y, 44%); }
-.cover .cover-chip, .cover .cover-spark {
-  transform-origin: var(--orbit-x, 50%) var(--orbit-y, 50%);
-  rotate: none;
-  transform: rotateX(calc(var(--character-pitch, 0deg) * var(--orbit-strength, 1))) rotateY(calc(var(--character-yaw, 0deg) * var(--orbit-strength, 1))) rotateZ(calc(var(--character-roll, 0deg) * var(--orbit-strength, 1)));
-  translate: calc(var(--cover-x) * var(--orbit-drift, .45)) calc(var(--cover-y) * var(--orbit-drift, .45)) var(--orbit-depth, 0px);
-}
+/* Independent chip tilt and opposing parallax restore the floating layers. */
+.cover, .cover-scene { perspective: 1000px; }
+.cover .cover-chip, .cover .cover-spark { transform-origin: center; rotate: var(--tilt-axis-x, 1) var(--tilt-axis-y, 0) 0 var(--tilt-angle, 0deg); }
+.cover .cover-chip { translate: calc(var(--cover-x) * -.7) calc(var(--cover-y) * -.7) calc(var(--focus-color, 0) * 32px); }
+.cover .chip-otaku, .cover .chip-code { translate: calc(var(--cover-x) * -.35) calc(var(--cover-y) * -.35) calc(var(--focus-color, 0) * -18px); }
 .cover-blur-toggle { position: absolute; z-index: 8; right: 0; bottom: 28px; display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 6px 10px; border: 1px solid var(--soft-line); border-radius: 999px; background: var(--paper); color: var(--ink); font: 500 11px 'Montserrat', sans-serif; cursor: pointer; }
 .cover-blur-toggle > span { width: 5px; height: 5px; border-radius: 50%; background: var(--blue); }
 .cover-blur-toggle[aria-pressed='false'] > span { background: currentColor; opacity: .4; }
@@ -35,12 +31,6 @@
 .cover[data-blur='off'] .character-focused { opacity: 0; }
 @media (max-width: 650px) { .cover-blur-toggle { bottom: 12px; font-size: 10px; padding-inline: 8px; gap: 5px; } }
 
-.cover .chip-otaku { --orbit-strength: .72; --orbit-drift: .15; --orbit-depth: -48px; }
-.cover .chip-code { --orbit-strength: .82; --orbit-drift: .25; --orbit-depth: -30px; }
-.cover .spark-back { --orbit-strength: .65; --orbit-drift: .1; --orbit-depth: -65px; }
-.cover .chip-github { --orbit-strength: 1.15; --orbit-drift: .9; --orbit-depth: 26px; }
-.cover .chip-draw { --orbit-strength: 1.25; --orbit-drift: 1.15; --orbit-depth: 40px; }
-.cover .spark-front { --orbit-strength: 1.35; --orbit-drift: 1.4; --orbit-depth: 54px; }
 
 /* Keep the poster interactive without native text selection or drag previews. */
 .cover, .cover * { -webkit-user-select: none; user-select: none; }

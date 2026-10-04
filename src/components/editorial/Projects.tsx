@@ -1,3 +1,4 @@
+import Icon from './Icon';
 import './SelectedWork.css';
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
@@ -60,7 +61,7 @@ function BoardRow({ category, language, paused }: { category: typeof categories[
       <AnimatePresence mode="wait" initial={false}>
         <motion.div className="board-current" key={project.id} initial="hidden" animate="shown" exit="out" variants={{ hidden: { opacity: 0 }, shown: { opacity: 1 }, out: { opacity: 0 } }} transition={{ duration: .35 }}>
           <Link className="board-detail-link" to={'/projects/' + project.id}>
-            <h4 className="board-title"><RollingTitle text={titleOf(project)} /><span className="work-board-arrow" aria-hidden="true">↗</span></h4>
+            <h4 className="board-title"><RollingTitle text={titleOf(project)} /><span className="work-board-arrow" aria-hidden="true"><Icon name="up-right" /></span></h4>
             <motion.p className="board-role" variants={{ hidden:{y:10,opacity:0},shown:{y:0,opacity:1},out:{y:-10,opacity:0} }} transition={{duration:.45}}>{project.role}</motion.p>
             <motion.p className="board-description" lang={{kr:'ko',en:'en',jp:'ja'}[language]} variants={{ hidden:{y:12,opacity:0},shown:{y:0,opacity:1},out:{y:-12,opacity:0} }} transition={{duration:.5,delay:.08}}>{summaryOf(project, language)}</motion.p>
           </Link>
@@ -73,8 +74,8 @@ function BoardRow({ category, language, paused }: { category: typeof categories[
 export default function Projects({ language }: { language: LanguageCode }) {
   const [paused, setPaused] = useState(false);
   return <section className="works-section" id="project-showcase" aria-labelledby="works-title">
-    <div className="section-heading"><h2 id="works-title"><SplitText text="Selected work" /></h2><Link className="all-projects-button" to="/projects">All Projects <span aria-hidden="true">↗</span></Link></div>
+    <div className="section-heading"><h2 id="works-title"><SplitText text="Selected work" /></h2><Link className="all-projects-button" to="/projects">All Projects <span aria-hidden="true"><Icon name="up-right" /></span></Link></div>
     <div className="work-board">{categories.map(category => <BoardRow key={category.value} category={category} language={language} paused={paused} />)}</div>
-    <button className="board-pause" onClick={() => setPaused(value => !value)} aria-label={paused ? 'Resume work rotation' : 'Pause work rotation'}>{paused ? 'Play ▷' : 'Pause Ⅱ'}</button>
+    <button className="board-pause" onClick={() => setPaused(value => !value)} aria-label={paused ? 'Resume work rotation' : 'Pause work rotation'}>{paused ? 'Play' : 'Pause'} <Icon name={paused ? 'play' : 'pause'} /></button>
   </section>;
 }

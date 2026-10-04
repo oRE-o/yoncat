@@ -1,3 +1,4 @@
+import Icon from './Icon';
 import { Link, useSearchParams } from 'react-router-dom';
 import { projects } from '../../data/projectData';
 import type { LanguageCode } from '../../data/i18n';
@@ -12,7 +13,7 @@ export default function AllProjects({ language }: { language: LanguageCode }) {
   const visible = projects.filter(project => category === 'All' || project.category === category);
   return (
     <section className="project-archive" id="all-projects" aria-labelledby="archive-title">
-      <Link className="archive-back" to="/#project-showcase">← Back to selected work</Link>
+      <Link className="archive-back" to="/#project-showcase"><Icon name="left" /> Back to selected work</Link>
       <div className="archive-heading"><h1 id="archive-title"><SplitText text="All Projects" /><span className="archive-period">.</span></h1><span>{projects.length} projects</span></div>
       <div className="archive-filters" role="group" aria-label="Project category">
         {categories.map(item => <button key={item} type="button" aria-pressed={category === item} onClick={() => setParams(item === 'All' ? {} : { category: item })}>{item}<span>{item === 'All' ? projects.length : projects.filter(project => project.category === item).length}</span></button>)}

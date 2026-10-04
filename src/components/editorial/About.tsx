@@ -1,3 +1,4 @@
+import Icon from './Icon';
 import './AboutStatus.css';
 import { experiences } from '../../data/experienceData';
 import { getLocalizedText, type LanguageCode } from '../../data/i18n';
@@ -36,11 +37,11 @@ export default function About({ language }: { language: LanguageCode }) {
           <p className="about-now-work">{currentWork}</p>
           <div className="about-now-track" aria-hidden="true"><span /></div>
           <p className="about-now-caption">{cooking}<span aria-hidden="true">…</span></p>
-        </div><p>{posterCopy[language].bio}</p></div><div className="about-links" aria-label="Personal links">{contactData.socials.map(item => <a key={item.name} href={item.url} target="_blank" rel="noopener noreferrer">{item.name.split('/')[0]} ↗</a>)}<a href={`mailto:${contactData.email}`}>Email ↗</a></div></div>
+        </div><p>{posterCopy[language].bio}</p></div><div className="about-links" aria-label="Personal links">{contactData.socials.map(item => <a key={item.name} href={item.url} target="_blank" rel="noopener noreferrer">{item.name.split('/')[0]} <Icon name="up-right" /></a>)}<a href={`mailto:${contactData.email}`}>Email <Icon name="up-right" /></a></div></div>
         <div className="about-art"><span className="about-outline" aria-hidden="true">ソナギ</span><img src="/art/original-character.png" alt="Upper-body portrait of Sonagii’s original character making a peace sign" width="2929" height="4648" loading="lazy" /><span className="about-signature" aria-hidden="true">sonagii_</span></div>
       </Reveal>
       <div className="experience-block" aria-labelledby="experience-title">
-        <div className="experience-heading"><h3 id="experience-title"><SplitText text="Experience" /><span aria-hidden="true">↘</span></h3></div>
+        <div className="experience-heading"><h3 id="experience-title"><SplitText text="Experience" /><span aria-hidden="true"><Icon name="down-right" /></span></h3></div>
         <div><div className="experience-timeline" id="experience-list"><span className="experience-progress" aria-hidden="true" />
           <AnimatePresence initial={false}>{years.filter(year => expanded || recentYears.includes(year)).map(year => <motion.div key={year} initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: .75, ease: [.22, 1, .36, 1] }} onAnimationComplete={() => ScrollTrigger.refresh()}>
           <div className="experience-year-group">
@@ -56,7 +57,7 @@ export default function About({ language }: { language: LanguageCode }) {
               </motion.div>
             </motion.div>)}</AnimatePresence></div>
           </div></motion.div>)}</AnimatePresence>
-        </div><button className="experience-toggle" type="button" aria-expanded={expanded} aria-controls="experience-list" onClick={() => setExpanded(value => !value)} lang={tag}>{toggleLabel}<motion.span aria-hidden="true" animate={{ rotate: expanded ? 180 : 0 }} transition={{duration:.5}}>↓</motion.span></button></div>
+        </div><button className="experience-toggle" type="button" aria-expanded={expanded} aria-controls="experience-list" onClick={() => setExpanded(value => !value)} lang={tag}>{toggleLabel}<motion.span aria-hidden="true" animate={{ rotate: expanded ? 180 : 0 }} transition={{duration:.5}}><Icon name="down" /></motion.span></button></div>
       </div>
     </section>
   );

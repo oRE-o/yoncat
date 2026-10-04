@@ -1,3 +1,5 @@
+import Icon from './components/editorial/Icon';
+import './components/editorial/MobileLayout.css';
 import './components/editorial/Navigation.css';
 import { useEffect, useRef, useState } from 'react';
 import Cover from './components/editorial/Cover';
@@ -52,23 +54,23 @@ export default function App() {
     <div className="folio">
       <a className="skip-link" href={detail ? '#project-detail' : isProjects ? '#all-projects' : '#project-showcase'}>Skip to work</a>
       <header className="masthead">
-        <Link className="masthead-logo" to="/#hero-poster" aria-label="Sonagii home">s<span aria-hidden="true">↗</span></Link>
+        <Link className="masthead-logo" to="/#hero-poster" aria-label="Sonagii home">s<span aria-hidden="true"><Icon name="up-right" /></span></Link>
         <nav className="section-navigation" aria-label="Main navigation" onMouseLeave={() => setHoveredNav(null)}>{[{name:'Main',to:'/#hero-poster'},{name:'About',to:'/#intro-section'},{name:'Work',to:'/#project-showcase'},{name:'Contact',to:location.pathname + '#contact-footer'}].map(item => <Link key={item.name} to={item.to} aria-current={activeNav === item.name ? 'location' : undefined} onMouseEnter={() => setHoveredNav(item.name)} onFocus={() => setHoveredNav(item.name)} onBlur={() => setHoveredNav(null)}>{(hoveredNav ?? activeNav) === item.name && <motion.span className="nav-marker" layoutId="nav-marker" transition={{ type:'spring', stiffness:380, damping:32 }} />}<span className="nav-label">{item.name}</span></Link>)}</nav>
-        <nav className="page-navigation" aria-label="Pages"><Link to="/projects" aria-current={isProjects ? 'page' : undefined}><span className="nav-label">All Projects <span aria-hidden="true">↗</span></span></Link></nav>
-        <div className="masthead-tools"><select className="language-select" aria-label="Language" value={language} onChange={event => setLanguage(event.target.value as LanguageCode)}><option value="kr">KR</option><option value="en">EN</option><option value="jp">JP</option></select><button className="theme-toggle" type="button" onClick={toggleTheme} aria-label={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'} title={theme === 'light' ? 'Dark theme' : 'Light theme'}><motion.svg key={theme} initial={{ rotate:-60, opacity:0 }} animate={{rotate:0,opacity:1}} transition={{duration:.3}} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">{theme === 'light' ? <path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z" /> : <><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></>}</motion.svg></button></div>
+        <nav className="page-navigation" aria-label="Pages"><Link to="/projects" aria-current={isProjects ? 'page' : undefined}><span className="nav-label">All Projects <span aria-hidden="true"><Icon name="up-right" /></span></span></Link></nav>
+        <div className="masthead-tools"><select className="language-select" aria-label="Language" value={language} onChange={event => setLanguage(event.target.value as LanguageCode)}><option value="kr">KR</option><option value="en">EN</option><option value="jp">JP</option></select><button className="theme-toggle" type="button" onClick={toggleTheme} aria-label={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'} title={theme === 'light' ? 'Dark theme' : 'Light theme'}><motion.span key={theme} initial={{ rotate: -60, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} transition={{ duration: .3 }} className="theme-icon"><Icon name={theme === 'light' ? 'moon' : 'sun'} /></motion.span></button></div>
       </header>
       <main>
         <Routes><Route path="/projects/:id" element={<ProjectDetail key={location.pathname} language={language} />} /><Route path="/projects" element={<AllProjects language={language} />} /><Route path="*" element={<>
         <Cover />
-        <Reveal className="cover-index"><a href={contactData.socials[0].url} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a><a href={contactData.socials[1].url} target="_blank" rel="noopener noreferrer">Twitter <span aria-hidden="true">↗</span></a><a href={`mailto:${contactData.email}`}>Email <span aria-hidden="true">↗</span></a><a href="#project-showcase">Explore work <span aria-hidden="true">↗</span></a></Reveal>
+        <Reveal className="cover-index"><a href={contactData.socials[0].url} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true"><Icon name="up-right" /></span></a><a href={contactData.socials[1].url} target="_blank" rel="noopener noreferrer">Twitter <span aria-hidden="true"><Icon name="up-right" /></span></a><a href={`mailto:${contactData.email}`}>Email <span aria-hidden="true"><Icon name="up-right" /></span></a><a href="#project-showcase">Explore work <span aria-hidden="true"><Icon name="up-right" /></span></a></Reveal>
         <About language={language} />
         <Projects language={language} />
         </>} /></Routes>
       </main>
       <footer className="contact" id="contact-footer">
-        <div className="contact-title"><h2><SplitText text="Get in touch" /><span className="contact-period">.</span></h2><a href={`mailto:${contactData.email}`} className="contact-arrow" aria-label="Email Yonghyuk Choi">↗</a></div>
-        <Reveal className="contact-info"><div><p lang={{kr:'ko',en:'en',jp:'ja'}[language]}>{posterCopy[language].contact}</p><a className="contact-email" href={`mailto:${contactData.email}`}>{contactData.email}</a></div><div className="contact-socials">{contactData.socials.map(item => <a key={item.name} href={item.url} target="_blank" rel="noopener noreferrer">{item.name} ↗</a>)}</div></Reveal>
-        <div className="colophon"><span>© {new Date().getFullYear()} Yonghyuk Choi</span><a href={detail ? '#project-detail' : isProjects ? '#all-projects' : '#hero-poster'}>Back to top ↑</a></div>
+        <div className="contact-title"><h2><SplitText text="Get in touch" /><span className="contact-period">.</span></h2><a href={`mailto:${contactData.email}`} className="contact-arrow" aria-label="Email Yonghyuk Choi"><Icon name="up-right" /></a></div>
+        <Reveal className="contact-info"><div><p lang={{kr:'ko',en:'en',jp:'ja'}[language]}>{posterCopy[language].contact}</p><a className="contact-email" href={`mailto:${contactData.email}`}>{contactData.email}</a></div><div className="contact-socials">{contactData.socials.map(item => <a key={item.name} href={item.url} target="_blank" rel="noopener noreferrer">{item.name} <Icon name="up-right" /></a>)}</div></Reveal>
+        <div className="colophon"><span>© {new Date().getFullYear()} Yonghyuk Choi</span><a href={detail ? '#project-detail' : isProjects ? '#all-projects' : '#hero-poster'}>Back to top <Icon name="up" /></a></div>
       </footer>
     </div>
   );
