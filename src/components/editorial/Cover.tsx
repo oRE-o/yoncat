@@ -14,8 +14,7 @@ export default function Cover() {
         .from('.cover-chip', { opacity: 0, scale: .8, y: 18, stagger: .12, duration: .7 }, .4)
         .from('.cover-spark', { opacity: 0, scale: .4, stagger: .16, duration: .8 }, .6)
         .from('#cover-title', { opacity: 0, y: 18, duration: .9 }, .4)
-        .from('.cover-next', { opacity: 0, y: -14, duration: .6 }, .9)
-        .set('.cover-scene, .cover-art, .cover-chip, .cover-spark, .cover-next, #cover-title', { clearProps: 'transform,translate,rotate,scale,opacity' });
+        .set('.cover-scene, .cover-art, .cover-chip, .cover-spark, #cover-title', { clearProps: 'transform,translate,rotate,scale,opacity' });
       const light = gsap.fromTo('.cover-light-travel', { left: '-20%' }, { left: '110%', duration: 3.8, ease: 'sine.inOut', repeat: -1, repeatDelay: 2.5, paused: true });
       observer = new IntersectionObserver(entries => { if (entries[0].isIntersecting) light.play(); else light.pause(); });
       if (coverRef.current) observer.observe(coverRef.current);
@@ -113,7 +112,6 @@ export default function Cover() {
       <a className="cover-chip chip-draw" lang="ja" aria-label="お絵かき — Twitter @oreodraw" href={contactData.socials[1].url} target="_blank" rel="noopener noreferrer">お絵かき <span aria-hidden="true">↗</span></a>
       <span className="cover-spark spark-front" aria-hidden="true">✦</span>
       <h1 id="cover-title">sonagii_</h1>
-      <a className="cover-next" href="#project-showcase" aria-label="View selected work"><span aria-hidden="true">↓</span></a>
     </section>
   );
 }

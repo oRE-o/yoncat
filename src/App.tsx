@@ -1,3 +1,4 @@
+import './components/editorial/Navigation.css';
 import { useEffect, useRef, useState } from 'react';
 import Cover from './components/editorial/Cover';
 import Projects from './components/editorial/Projects';
@@ -12,6 +13,7 @@ import { projects } from './data/projectData';
 import { Reveal, SplitText } from './components/editorial/Motion';
 import { motion } from 'motion/react';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
+import { useThemeTransition } from './hooks/useThemeTransition';
 
 export default function App() {
   const location = useLocation();
@@ -21,11 +23,8 @@ export default function App() {
   const detail = projects.find(project => location.pathname === `/projects/${project.id}`);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
   const [hoveredNav, setHoveredNav] = useState<string | null>(null);
-  const activeNav = location.hash === '#intro-section' ? 'About' : location.hash === '#contact-footer' ? 'Contact' : isProjects || location.hash === '#project-showcase' ? 'Work' : 'Main';
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#202126' : '#eeede7');
-  }, [theme]);
+  const activeNav = location.hash === '#intro-section' ? 'About' : location.hash === '#contact-footer' ? 'Contact' : isProjects ? null : location.hash === '#project-showcase' ? 'Work' : 'Main';
+  useThemeTransition(theme);
   const toggleTheme = () => {
     const next = theme === 'light' ? 'dark' : 'light';
     setTheme(next);
@@ -54,7 +53,8 @@ export default function App() {
       <a className="skip-link" href={detail ? '#project-detail' : isProjects ? '#all-projects' : '#project-showcase'}>Skip to work</a>
       <header className="masthead">
         <Link className="masthead-logo" to="/#hero-poster" aria-label="Sonagii home">s<span aria-hidden="true">↗</span></Link>
-        <nav aria-label="Main navigation" onMouseLeave={() => setHoveredNav(null)}>{[{name:'Main',to:'/#hero-poster'},{name:'About',to:'/#intro-section'},{name:'Work',to:'/#project-showcase'},{name:'Contact',to:location.pathname + '#contact-footer'}].map(item => <Link key={item.name} to={item.to} aria-current={activeNav === item.name ? 'location' : undefined} onMouseEnter={() => setHoveredNav(item.name)} onFocus={() => setHoveredNav(item.name)} onBlur={() => setHoveredNav(null)}>{(hoveredNav ?? activeNav) === item.name && <motion.span className="nav-marker" layoutId="nav-marker" transition={{ type:'spring', stiffness:380, damping:32 }} />}<span className="nav-label">{item.name}</span></Link>)}</nav>
+        <nav className="section-navigation" aria-label="Main navigation" onMouseLeave={() => setHoveredNav(null)}>{[{name:'Main',to:'/#hero-poster'},{name:'About',to:'/#intro-section'},{name:'Work',to:'/#project-showcase'},{name:'Contact',to:location.pathname + '#contact-footer'}].map(item => <Link key={item.name} to={item.to} aria-current={activeNav === item.name ? 'location' : undefined} onMouseEnter={() => setHoveredNav(item.name)} onFocus={() => setHoveredNav(item.name)} onBlur={() => setHoveredNav(null)}>{(hoveredNav ?? activeNav) === item.name && <motion.span className="nav-marker" layoutId="nav-marker" transition={{ type:'spring', stiffness:380, damping:32 }} />}<span className="nav-label">{item.name}</span></Link>)}</nav>
+        <nav className="page-navigation" aria-label="Pages"><Link to="/projects" aria-current={isProjects ? 'page' : undefined}><span className="nav-label">All Projects <span aria-hidden="true">↗</span></span></Link></nav>
         <div className="masthead-tools"><select className="language-select" aria-label="Language" value={language} onChange={event => setLanguage(event.target.value as LanguageCode)}><option value="kr">KR</option><option value="en">EN</option><option value="jp">JP</option></select><button className="theme-toggle" type="button" onClick={toggleTheme} aria-label={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'} title={theme === 'light' ? 'Dark theme' : 'Light theme'}><motion.svg key={theme} initial={{ rotate:-60, opacity:0 }} animate={{rotate:0,opacity:1}} transition={{duration:.3}} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">{theme === 'light' ? <path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z" /> : <><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></>}</motion.svg></button></div>
       </header>
       <main>

@@ -35,7 +35,7 @@ a:focus-visible, button:focus-visible, select:focus-visible, summary:focus-visib
 .cover-scene { position: absolute; inset: 0 0 52px; background: var(--ink); overflow: hidden; clip-path: polygon(8% 0,100% 0,92% 100%,0 100%); }
 .cover-art { position: absolute; z-index: 2; inset: 0; overflow: hidden; pointer-events: none; }
 .character-layer { position: absolute; inset: 0; }
-.cover-art img { position: absolute; height: 185%; width: auto; max-width: none; left: 50%; top: 0; transform: translateX(-50%); filter: grayscale(1) contrast(1.17); translate: var(--cover-x) var(--cover-y); }
+.cover-art img { position: absolute; height: 185%; width: auto; max-width: none; left: 50%; top: 0; transform: translateX(-50%); filter: contrast(1.03) saturate(.95); translate: var(--cover-x) var(--cover-y); }
 .character-blurred { filter: blur(var(--pointer-blur, 0px)); }
 .character-focused { mask-image: radial-gradient(ellipse 420px 350px at var(--focus-x) var(--focus-y), #000 50%, #000d 68%, transparent 100%); }
 .cover-chip { position: absolute; display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 48px; padding: 12px 23px; border: 1px solid currentColor; border-radius: 999px; font-family: 'Montserrat', sans-serif; font-size: clamp(15px, 1.5vw, 20px); font-weight: 550; line-height: 1.1; white-space: nowrap; translate: calc(var(--cover-x) * -.7) calc(var(--cover-y) * -.7); }
@@ -51,12 +51,9 @@ a.cover-chip:hover, a.cover-chip:focus-visible { filter: none; }
 .spark-front { z-index: 4; right: 25%; top: 47%; font-size: 100px; transform: rotate(14deg); }
 .cover h1 { position: absolute; z-index: 5; left: -1%; bottom: 38px; font-family: 'Montserrat', sans-serif; font-size: clamp(132px, 21.2vw, 298px); font-weight: 500; letter-spacing: -.095em; line-height: .82; color: var(--blue); translate: calc(var(--cover-x) * -.35) 0; pointer-events: none; }
 .cover h1 span { letter-spacing: -.16em; }
-.cover-next { position: absolute; z-index: 3; right: 1%; bottom: 22px; width: 68px; height: 68px; border: 1px solid var(--blue); border-radius: 50%; color: var(--blue); font-size: 38px; display: grid; place-items: center; background: var(--paper); transition: color .2s, background .2s; }
-.cover-next:hover { background: var(--blue); color: var(--paper); }
 .cover-index { display: grid; grid-template-columns: 1fr 1fr 1fr 1.2fr; margin-top: 42px; border: 1px solid var(--line); font-family: 'Montserrat', sans-serif; }
 .cover-index > * { padding: 22px 24px; font-size: 15px; border-right: 1px solid var(--line); display: flex; align-items: center; }
 .cover-index > :last-child { border-right: 0; background: var(--blue); color: var(--paper); justify-content: space-between; gap: 20px; }
-.cover-next { z-index: 6; }
 .cover-index a { justify-content: space-between; gap: 12px; }
 .cover-index a:hover { background: var(--ink); color: var(--paper); }
 .works-section { padding-top: 110px; }
@@ -100,7 +97,7 @@ a.cover-chip:hover, a.cover-chip:focus-visible { filter: none; }
 .about-text h2 { font-family: 'Montserrat', sans-serif; font-size: clamp(72px, 8vw, 114px); font-weight: 550; letter-spacing: -.075em; line-height: .92; }
 .about-text h2 > .about-accent { color: var(--blue); }
 .about-bio { max-width: 490px; font-size: 16px; line-height: 1.85; word-break: keep-all; overflow-wrap: anywhere; }
-.about-bio .bio-intro { font-size: 22px; line-height: 1.65; margin-bottom: 24px; }
+.about-bio .bio-intro { font-weight: 700; font-size: 22px; line-height: 1.65; margin-bottom: 24px; }
 .about-art { position: relative; min-height: 640px; overflow: hidden; border-left: 1px solid var(--line); background: var(--blue); isolation: isolate; }
 .about-outline { position: absolute; z-index: 0; left: 5%; top: 10%; color: transparent; -webkit-text-stroke: 1px var(--paper); font-family: 'Pretendard JP', sans-serif; font-weight: 800; font-size: clamp(72px, 8vw, 114px); writing-mode: vertical-rl; line-height: 1; }
 .about-art img { position: absolute; z-index: 1; height: 185%; width: auto; max-width: none; top: 4%; left: 50%; transform: translateX(-50%); filter: grayscale(1) contrast(1.12); }
@@ -185,7 +182,6 @@ a.cover-chip:hover, a.cover-chip:focus-visible { filter: none; }
   .spark-back { left: 13%; }
   .spark-front { right: 14%; }
   .cover h1 { font-size: 21.5vw; }
-  .cover-next { width: 54px; height: 54px; bottom: 8px; font-size: 32px; }
   .cover-index > * { padding: 18px 15px; font-size: 14px; }
   .about-text { padding: 32px; }
   .about-art { min-height: 580px; }
@@ -239,7 +235,6 @@ a.cover-chip:hover, a.cover-chip:focus-visible { filter: none; }
   .spark-back { left: 0; top: 41%; font-size: 58px; }
   .spark-front { right: 0; top: 52%; font-size: 66px; }
   .cover h1 { left: -2%; bottom: 21px; font-size: 22vw; font-weight: 600; letter-spacing: -.105em; }
-  .cover-next { width: 42px; height: 42px; bottom: 18px; right: 0; font-size: 27px; }
   .cover-index { margin-top: 52px; grid-template-columns: 1fr 1fr; }
   .cover-index > * { padding: 18px 14px; font-size: 13px; }
   .cover-index > :nth-child(2) { border-right: 0; }
@@ -484,9 +479,8 @@ html { scroll-padding-top: 84px; }
   .work-board-row h3 a:hover, .contact-socials a:hover, .card-links a:hover, .archive-back:hover { transform: translateX(4px); }
   .work-board-arrow { transition: transform .55s var(--motion-ease); }
   .work-board-link:hover .work-board-arrow { transform: translate(4px, -4px); }
-  .card-read-more span, .all-projects-button span, .cover-next span { display: inline-block; transition: transform .55s var(--motion-ease); }
+  .card-read-more span, .all-projects-button span { display: inline-block; transition: transform .55s var(--motion-ease); }
   .card-read-more:hover span, .all-projects-button:hover span { transform: translate(3px, -3px); }
-  .cover-next:hover span { transform: translateY(5px); }
   .experience-entry { transition: padding-left .5s var(--motion-ease), border-color .4s; }
   .experience-entry:hover { border-color: var(--blue); }
   .theme-toggle { transition: background .35s, color .35s, border-color .35s; }
@@ -510,3 +504,6 @@ html { scroll-padding-top: 84px; }
 
 /* Lenis owns interpolation; native smooth scrolling must not compete. */
 html.lenis { scroll-behavior: auto !important; }
+
+/* Local color inheritance lets each region settle into night in sequence. */
+.masthead, .cover, .cover-index, .about-spread, .experience-block, .work-board-row, .project-archive, .project-detail, .contact { color: var(--ink); }

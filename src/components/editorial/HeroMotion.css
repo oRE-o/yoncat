@@ -1,9 +1,8 @@
 /* Perspective follows the same eased pointer values as the focus effect. */
 .cover, .cover-scene { perspective: 1000px; }
-.cover-chip, .cover-spark, .cover-next { rotate: var(--tilt-axis-x, 1) var(--tilt-axis-y, 0) 0 var(--tilt-angle, 0deg); }
+.cover-chip, .cover-spark { rotate: var(--tilt-axis-x, 1) var(--tilt-axis-y, 0) 0 var(--tilt-angle, 0deg); }
 .cover-chip { translate: calc(var(--cover-x) * -.7) calc(var(--cover-y) * -.7) calc(var(--focus-color, 0) * 32px); }
 .chip-otaku, .chip-code { translate: calc(var(--cover-x) * -.35) calc(var(--cover-y) * -.35) calc(var(--focus-color, 0) * -18px); }
-.cover-next { translate: calc(var(--cover-x) * -.25) calc(var(--cover-y) * -.25) calc(var(--focus-color, 0) * 18px); }
 .cover-light-line { position: absolute; z-index: 1; pointer-events: none; width: 125%; height: 1px; left: -12%; top: 46%; transform: rotate(-20deg); background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--blue) 35%, transparent), transparent); }
 .cover-light-travel { position: absolute; top: 0; width: 20%; height: 2px; background: linear-gradient(90deg, transparent, var(--blue) 65%, #eeede7 95%, transparent); filter: drop-shadow(0 0 5px var(--blue)); }
 @media (max-width: 650px) { .cover-light-line { top: 43%; transform: rotate(-28deg); } }

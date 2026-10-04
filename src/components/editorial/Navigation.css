@@ -1,0 +1,20 @@
+.folio .masthead { grid-template-columns: auto minmax(0, 1fr) auto auto; gap: 18px; }
+.folio .masthead .section-navigation { justify-content: flex-start; }
+.folio .masthead .page-navigation { justify-content: flex-end; }
+.masthead .page-navigation a { white-space: nowrap; }
+.masthead .page-navigation a[aria-current='page'] { color: var(--blue); }
+.masthead .page-navigation .nav-label { display: flex; gap: 12px; align-items: center; }
+@media (max-width: 800px) {
+  .folio .masthead { gap: 8px; }
+  .folio .masthead nav a { padding-inline: 9px; font-size: 14px; }
+}
+@media (max-width: 650px) {
+  .folio .masthead { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: 44px 40px; height: 92px; gap: 0 8px; padding-bottom: 8px; }
+  .folio .masthead::before { height: 92px; }
+  .masthead-logo { grid-column: 1; grid-row: 1; }
+  .folio .masthead .section-navigation { grid-column: 1 / -1; grid-row: 2; }
+  .folio .masthead .page-navigation { grid-column: 2; grid-row: 1; }
+  .masthead-tools { grid-column: 3; grid-row: 1; }
+  .folio .masthead .section-navigation a { padding-inline: 12px; }
+  .folio .masthead .section-navigation a:first-child { margin-left: -12px; }
+}
