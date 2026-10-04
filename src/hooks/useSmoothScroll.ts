@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
 import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -14,7 +15,10 @@ export const useSmoothScroll = () => {
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.35,
+      smoothWheel: true,
+      syncTouch: false,
+      anchors: { offset: -80, duration: 1.35 },
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
     lenisRef.current = lenis;
@@ -32,13 +36,15 @@ export const useSmoothScroll = () => {
     };
   }, []);
 
-  const scrollToSection = useCallback((id: string) => {
-    const el = document.getElementById(id);
-    if (!el) return;
+  const scrollToSection = useCallback((id: string, immediate = false) => {
+    const el = id ? document.getElementById(id) : null;
+    if (id && !el) return;
     if (lenisRef.current) {
-      lenisRef.current.scrollTo(el, { offset: 0 });
+      lenisRef.current.resize();
+      lenisRef.current.scrollTo(el ?? 0, { offset: el ? -80 : 0, immediate, duration: 1.35 });
     } else {
-      el.scrollIntoView({ behavior: 'smooth' });
+      if (el) el.scrollIntoView({ behavior: immediate ? 'instant' : 'smooth' });
+      else window.scrollTo({ top: 0, behavior: 'instant' });
     }
   }, []);
 

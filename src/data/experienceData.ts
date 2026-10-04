@@ -1,4 +1,5 @@
 import type { LocalizedText } from "./i18n";
+import { shiftUpInternship } from './shiftUpInternship';
 
 /** Broad profession track an entry belongs to; drives grouping in the Experience section. */
 export type ExperienceTrack = "developer" | "illustration";
@@ -16,6 +17,15 @@ export interface Experience {
 }
 
 export const experiences: Experience[] = [
+  {
+    id: 8,
+    role: 'PM Intern · GODDESS OF VICTORY: NIKKE',
+    company: 'SHIFT UP',
+    period: shiftUpInternship.period,
+    summary: shiftUpInternship.summary,
+    description: shiftUpInternship.description,
+    track: 'developer',
+  },
   {
     id: 7,
     role: "Illustrator",

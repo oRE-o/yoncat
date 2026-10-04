@@ -1,10 +1,10 @@
-import { RiInstagramFill, RiGithubFill } from "react-icons/ri";
+import { RiTwitterFill, RiGithubFill } from "react-icons/ri";
 
 export const contactData = {
   title: "Let's Connect!",
   subtitle: "Let's build something awesome together.",
   description: "Phone: 82+ 10-2562-9120",
-  email: "cyhs9120@naver.com",
+  email: "oreo@yon.cat",
   footerRights: "© 2026 Sonagii_. All rights reserved.",
   socials: [
     {
@@ -13,9 +13,9 @@ export const contactData = {
       icon: RiGithubFill,
     },
     {
-      name: "Instagram",
-      url: "https://www.instagram.com/oREoTheCream",
-      icon: RiInstagramFill,
+      name: "Twitter",
+      url: "https://twitter.com/oreodraw",
+      icon: RiTwitterFill,
     },
   ],
 };

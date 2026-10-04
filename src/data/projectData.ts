@@ -1,4 +1,5 @@
 import type { LocalizedText } from "./i18n";
+import { shiftUpInternship } from './shiftUpInternship';
 
 export interface ProjectLink {
   name: string;
@@ -18,6 +19,17 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    id: 'shift-up-nikke',
+    title: 'GODDESS OF VICTORY: NIKKE',
+    category: 'Game',
+    role: 'PM Intern · SHIFT UP',
+    year: shiftUpInternship.period,
+    images: [],
+    description: shiftUpInternship.description,
+    tags: ['PM', 'Live Service', 'Automation', 'Collaboration'],
+    links: [],
+  },
   // Game Projects
   {
     id: "peptide",
