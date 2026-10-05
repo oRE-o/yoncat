@@ -41,7 +41,7 @@ export default function App() {
     try { localStorage.setItem('yoncat-language', language); } catch { /* Language remains available for this visit. */ }
   }, [language]);
   useEffect(() => {
-    document.title = detail ? `${detail.title} — SONAGII_` : isProjects ? 'All Projects — SONAGII_' : 'SONAGII_ — Yonghyuk Choi';
+    document.title = detail ? `${detail.title} — 超新星` : isProjects ? 'All Projects — 超新星' : '超新星';
     const immediate = previousPath.current !== location.pathname;
     previousPath.current = location.pathname;
     const frame = requestAnimationFrame(() => {
@@ -51,7 +51,7 @@ export default function App() {
   }, [location.pathname, location.hash, isProjects, detail, scrollToSection]);
 
   return (
-    <div className="folio">
+    <div className={`folio${isProjects ? '' : ' folio-home'}`}>
       <a className="skip-link" href={detail ? '#project-detail' : isProjects ? '#all-projects' : '#project-showcase'}>Skip to work</a>
       <header className="masthead">
         <Link className="masthead-logo" to="/#hero-poster" aria-label="Sonagii home">s<span aria-hidden="true"><Icon name="up-right" /></span></Link>

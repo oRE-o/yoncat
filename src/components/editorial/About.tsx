@@ -13,8 +13,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function About({ language }: { language: LanguageCode }) {
-  const currentWork = { kr: 'Peptide 개발 · 기획하고, 코드 짜고, 그림 그리는 중', en: 'Building Peptide · game design, code & illustration', jp: 'Peptide制作中 · 企画も、コードも、イラストも。' }[language];
-  const cooking = { kr: '완성까지… 일단 계속 만드는 중', en: 'Almost there… probably.', jp: '完成まで…とりあえず作り続ける。' }[language];
+  const currentWork = { kr: '초신성을 만드는 중...', en: 'A supernova in the making...', jp: '超新星を作っています...' }[language];
+  const cooking = { kr: '목표는 2028년 10월쯤', en: 'Aiming for around October 2028', jp: '2028年10月ごろを目指して' }[language];
   const tag = { kr: 'ko', en: 'en', jp: 'ja' }[language];
   const section = useRef<HTMLElement>(null);
   const [expanded, setExpanded] = useState(false);
@@ -36,7 +36,7 @@ export default function About({ language }: { language: LanguageCode }) {
         <div className="about-text"><h2 id="about-title"><SplitText text="About" /><br /><span className="about-accent"><SplitText text="me." /></span></h2><div className="about-bio" lang={tag}><p className="bio-intro">{posterCopy[language].intro}</p><div className="about-now">
           <p className="about-now-work">{currentWork}</p>
           <div className="about-now-track" aria-hidden="true"><span /></div>
-          <p className="about-now-caption">{cooking}<span aria-hidden="true">…</span></p>
+          <p className="about-now-caption">{cooking}<span aria-hidden="true">✦</span></p>
         </div><p>{posterCopy[language].bio}</p></div><div className="about-links" aria-label="Personal links">{contactData.socials.map(item => <a key={item.name} href={item.url} target="_blank" rel="noopener noreferrer">{item.name.split('/')[0]} <Icon name="up-right" /></a>)}<a href={`mailto:${contactData.email}`}>Email <Icon name="up-right" /></a></div></div>
         <div className="about-art"><span className="about-outline" aria-hidden="true">ソナギ</span><img src="/art/original-character.png" alt="Upper-body portrait of Sonagii’s original character making a peace sign" width="2929" height="4648" loading="lazy" /><span className="about-signature" aria-hidden="true">sonagii_</span></div>
       </Reveal>

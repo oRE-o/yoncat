@@ -79,3 +79,27 @@
   .folio .spark-front { right: 10%; top: 44%; font-size: 42px; }
   .folio .cover-blur-toggle { display: none; }
 }
+
+@media (max-width: 650px) {
+  .folio.folio-home { padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px)); }
+  .folio.folio-home .masthead { position: relative; height: 48px; grid-template-rows: 48px; padding: 0; border-bottom: 0; backdrop-filter: none; background: transparent; }
+  .folio.folio-home .masthead::before { display: none; }
+  .folio.folio-home .masthead .section-navigation {
+    position: fixed;
+    z-index: 50;
+    top: auto;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    left: 16px;
+    right: 16px;
+    width: auto;
+    padding: 5px;
+    gap: 3px;
+    border: 1px solid var(--soft-line);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--paper) 94%, transparent);
+    backdrop-filter: blur(16px);
+  }
+  .folio.folio-home .masthead .section-navigation a { font-size: 12px; min-height: 44px; padding-inline: 5px; border-radius: 999px; }
+  .folio.folio-home .masthead .section-navigation a[aria-current='location'] { color: var(--blue); }
+  .folio.folio-home .cover { margin-top: 4px; height: min(700px, calc(100svh - 132px)); }
+}

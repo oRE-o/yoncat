@@ -40,17 +40,23 @@ export const projects: Project[] = [
     images: ["/images/peptide/main.png"],
     description: {
       kr:
-        "중앙 방어형 구조와 로그라이크 런 사이클을 결합한 미소녀 타워 디펜스 게임입니다.\n" +
-        "기획 총괄, Unity(C#) 클라이언트 개발, 일러스트까지 직접 맡고 있는 가장 큰 개인 프로젝트로,\n" +
-        "올라운더 개발자로서 쌓아온 경험을 모아 2인 팀과 함께 군 복무 이후 2년 내 정식 출시를 목표로 개발하고 있습니다.",
+        "중앙 방어형 구조와 로그라이크 런 사이클을 결합한 미소녀 타워 디펜스 게임입니다. 4인 팀으로 개발하고 있으며, 작은 팀에서 출발해 게임의 규모와 완성도를 함께 키워가고 있습니다.\n" +
+        "PM과 기획 총괄을 중심으로 Unity(C#) 클라이언트 개발, 일러스트까지 직접 맡고 있습니다. 기획과 구현, 비주얼을 오가며 쌓아온 경험을 한 작품에 담는, 현재 가장 많은 힘을 쏟고 있는 프로젝트입니다.\n" +
+        "기존 2인 팀에 3D 모델링을 담당하는 팀원과 작곡에 도움을 주는 팀원이 합류하면서 총 4명이 되었습니다. 각자의 전문성을 더해 프로그래밍과 일러스트뿐 아니라 모델링과 음악까지 함께 만들어가는 팀으로 확장하고 있습니다.\n" +
+        "목표는 “대학생스럽지 않은 퀄리티의 게임”입니다. 학생 프로젝트라는 이유로 완성도의 기준을 낮추지 않고, 게임의 재미부터 비주얼과 음악까지 하나의 작품으로 납득할 수 있는 수준을 지향합니다.\n" +
+        "앞으로 국경을 넘는 협업으로 다양한 창작자와 함께할 기회를 넓히고, 팀과 프로젝트의 규모도 차근차근 키워가려 합니다. 군 복무 이후 2년 내 정식 출시를 목표로 개발하고 있습니다.",
       en:
-        "A bishōjo tower defense game that fuses a central-defense layout with a roguelike run loop.\n" +
-        "I'm running design direction, Unity (C#) client work, and the illustration side myself — this is the most ambitious personal project I'm building right now.\n" +
-        "Built as a two-person team, the goal is a proper release within two years (after my mandatory military service), pulling together everything I've learned across planning, engineering, and art.",
+        "A bishōjo tower defense game combining central defense with a roguelike run loop. Now in development by a four-person team, Peptide is growing in both scope and ambition from its small-team beginnings.\n" +
+        "I lead project management and game design while also working on the Unity (C#) client and illustrations. This is the project I am putting the most into, bringing together my experience across design, implementation, and visual art.\n" +
+        "The original two-person team has been joined by a 3D modeler and a teammate contributing to music composition. With four people, we are expanding the collaboration across programming, illustration, modeling, and music.\n" +
+        "Our goal is a game whose quality stands on its own, without the qualifier “made by university students.” We want the gameplay, visuals, and music to feel like a complete work, rather than lowering our standards because this began as a student project.\n" +
+        "As the project grows, we aim to collaborate with creators across borders and gradually expand the team and its scope. We are working toward a full release within two years after my mandatory military service.",
       jp:
-        "中央防衛型のレイアウトとローグライクなラン構造を組み合わせた美少女タワーディフェンスゲームです。\n" +
-        "企画統括、Unity(C#)クライアント開発、イラストまで自ら担当している、現在進行形で最も力を注いでいる個人プロジェクトです。\n" +
-        "2人チームで開発しており、兵役後を含む2年以内の正式リリースを目標に、これまで培ってきたオールラウンドな経験を全投入しています。",
+        "中央防衛型の構造とローグライクのランサイクルを組み合わせた美少女タワーディフェンスゲームです。現在は4人チームで開発し、小さなチームから作品の規模と完成度を少しずつ高めています。\n" +
+        "PMと企画統括を軸に、Unity(C#)のクライアント開発やイラストも自ら担当しています。企画・実装・ビジュアルを行き来して積み重ねてきた経験を注ぐ、今もっとも力を入れているプロジェクトです。\n" +
+        "従来の2人に、3Dモデリングを担当するメンバーと作曲をサポートするメンバーが加わり、計4人になりました。それぞれの専門性を持ち寄り、プログラミングやイラストに加え、モデリングと音楽も一緒に作るチームへと広がっています。\n" +
+        "目指すのは「大学生が作ったとは思えないクオリティのゲーム」です。学生のプロジェクトだからと完成度の基準を下げず、遊びの面白さからビジュアル、音楽まで、一つの作品として納得できる仕上がりを追求します。\n" +
+        "今後は国境を越えたコラボレーションを通じて、さまざまなクリエイターと制作する機会を増やし、チームと作品の規模を着実に育てていきたいと考えています。兵役終了後2年以内の正式リリースを目標に開発中です。",
     },
     tags: ["Unity", "C#", "Tower Defense", "Roguelike", "All-rounder"],
     links: [],
@@ -64,22 +70,26 @@ export const projects: Project[] = [
     images: ["/images/eri/main.png"],
     description: {
       kr:
-        "키보드 넘패드와 마우스를 동시에 사용하는 복합 입력 기반 리듬 액션 게임입니다.\n" +
-        "사용자가 즉시 읽을 수 있도록 가독성과 심미성을 동시에 만족하는 UI를 설계/개선하는 일을 맡고 있으며,\n" +
-        "전용 물리 컨트롤러의 PCB 설계와 실물 제작, 행사 출품용 홍보물/디자인 검수까지 함께 담당합니다.\n" +
-        "Nexon Dream Members 출전을 거쳐 2026년 PlayX4 참가를 준비 중인, 동아리 출시 목표 프로젝트입니다.",
+        "ERI: Emotive Rhythm Interaction은 넘패드와 마우스를 함께 사용하는 리듬 액션 게임입니다. 리듬에 맞춘 이동과 탄막 공략을 두 입력 장치로 연결합니다.\n" +
+        "3×3 격자를 이동하며 탄막을 피하고, 슬라이더와 원형 노트를 처리해 보스의 탄환을 패링합니다. 서로 보완하는 두 조작을 통해 집에서도 아케이드 같은 연주감을 만드는 게임입니다.\n" +
+        "저는 빠르게 상황을 읽을 수 있는 UI의 설계와 개선을 맡고 있습니다. 리듬과 탄막을 동시에 따라가야 하는 게임인 만큼, 정보의 가독성과 시각적인 매력을 함께 고려합니다.\n" +
+        "화면 밖의 조작 경험도 담당합니다. 전용 물리 컨트롤러의 PCB 설계와 실물 제작을 진행하고, 행사 출품용 홍보물과 디자인 검수에도 참여합니다. UI와 하드웨어를 함께 다루며 게임의 입력 방식을 실제 플레이 경험으로 연결하는 프로젝트입니다.\n" +
+        "HAJE에서 개발 중이며 Steam 상점 페이지가 공개되어 있습니다. 현재 Steam에는 출시 예정으로 안내되어 있습니다.",
       en:
-        "A rhythm-action game that asks the player to play with a numpad and a mouse at the same time, treating the two devices as one composite input surface.\n" +
-        "I lead the UI direction — making sure something this dense stays legible and visually distinct — and also design and build the dedicated physical controller (PCB and chassis), plus review the promotional artwork.\n" +
-        "After showing at Nexon Dream Members, the team is now preparing the build for PlayX4 2026, aiming for a full release out of HAJE.",
+        "ERI: Emotive Rhythm Interaction is a rhythm-action game built around numpad and mouse controls, combining rhythmic movement with bullet-pattern encounters.\n" +
+        "Move across a 3×3 grid to dodge bullets, then clear slider and circle notes to parry the boss’s attacks. The complementary inputs aim to bring an arcade-like sense of performance to home play.\n" +
+        "I design and refine the UI, balancing readability with visual appeal so players can follow both rhythm cues and incoming patterns.\n" +
+        "My work also extends to the physical controls: PCB design and fabrication of a dedicated controller, alongside promotional material and design reviews for exhibitions. Working across UI and hardware lets me connect the game’s unusual input scheme to a tangible play experience.\n" +
+        "Developed at HAJE, the game has a public Steam store page and is currently listed as coming soon.",
       jp:
-        "キーボードのテンキーとマウスを同時に使う、複合入力ベースのリズムアクションゲームです。\n" +
-        "情報量が多くても瞬時に読める可読性と美観を両立させるUI設計・改善を担当し、\n" +
-        "専用フィジカルコントローラのPCB設計・実機製作、出展用の宣伝物・デザインの検証まで横断的に行っています。\n" +
-        "Nexon Dream Membersへの出展を経て、2026年のPlayX4参加を準備中の、サークル発リリースを目標としたプロジェクトです。",
+        "ERI: Emotive Rhythm Interactionは、テンキーとマウスを組み合わせたリズムアクションゲームです。リズムに合わせた移動と弾幕への対応を、二つの入力でつなぎます。\n" +
+        "3×3のマスを移動して弾を避け、スライダーとサークルのノーツを処理してボスの弾をパリィします。互いを補う操作で、自宅でもアーケードのような演奏感を目指します。\n" +
+        "私はUIの設計と改善を担当しています。リズムと弾幕を同時に追うゲームとして、必要な情報を素早く読み取れることと、ビジュアルの魅力を両立させています。\n" +
+        "専用フィジカルコントローラのPCB設計と実機製作も担当し、出展用の宣伝物やデザインの検証にも参加しています。UIとハードウェアの両面から、独自の入力方式を実際のプレイ体験へとつなぐプロジェクトです。\n" +
+        "HAJEで開発中で、Steamストアページを公開しています。現在、Steamでは近日登場と案内されています。",
     },
-    tags: ["Rhythm Action", "UI", "PCB", "Hardware"],
-    links: [],
+    tags: ["Rhythm Action", "Bullet Hell", "UI", "PCB", "Hardware"],
+    links: [{ name: "Steam", url: "https://store.steampowered.com/app/4629670/ERI_Emotive_Rhythm_Interaction/" }],
   },
   {
     id: "project-mt",
