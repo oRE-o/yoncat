@@ -352,7 +352,7 @@ html { scroll-padding-top: 84px; }
 .masthead nav a { min-height: 40px; padding: 0 18px; font-size: 16px; letter-spacing: -.035em; isolation: isolate; }
 .masthead nav a::after { display: none; }
 .nav-label { position: relative; z-index: 1; }
-.nav-marker { position: absolute; inset: 3px 0; border-radius: 999px; background: var(--nav-surface); z-index: 0; }
+.nav-marker { position: absolute; inset: 3px 0; border-radius: 999px; pointer-events: none; z-index: 0; }
 .masthead-tools { justify-self: end; display: flex; align-items: center; gap: 10px; }
 .language-select { width: 52px; font-size: 12px; }
 .theme-toggle { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 1px solid var(--soft-line); border-radius: 50%; background: transparent; }
