@@ -12,9 +12,9 @@
   .folio .masthead { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: 44px 40px; height: 92px; gap: 0 8px; padding-bottom: 8px; }
   .folio .masthead::before { height: 92px; }
   .masthead-logo { grid-column: 1; grid-row: 1; }
-  .folio .masthead .section-navigation { grid-column: 1 / -1; grid-row: 2; }
+  .folio .masthead .section-navigation { grid-column: 1 / -1; grid-row: 2; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); min-width: 0; }
   .folio .masthead .page-navigation { grid-column: 2; grid-row: 1; }
   .masthead-tools { grid-column: 3; grid-row: 1; }
-  .folio .masthead .section-navigation a { padding-inline: 12px; }
-  .folio .masthead .section-navigation a:first-child { margin-left: -12px; }
+  .folio .masthead .section-navigation a { min-width: 0; justify-content: center; padding-inline: 6px; font-size: 12px; }
+  .folio .masthead .section-navigation a:first-child { margin-left: 0; }
 }
