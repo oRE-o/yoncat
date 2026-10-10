@@ -1,4 +1,4 @@
-import Icon from './Icon';
+import TechnicalLink from './TechnicalLink';
 import './HeroMotion.css';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
@@ -110,8 +110,8 @@ export default function Cover() {
         </div>
         <div className="cover-light-line" aria-hidden="true"><span className="cover-light-travel" /></div>
       </div>
-      <a className="cover-chip chip-github" href={contactData.socials[0].url} target="_blank" rel="noopener noreferrer">GitHub <Icon name="github" /></a>
-      <a className="cover-chip chip-draw" lang="ja" aria-label="お絵かき — Twitter @oreodraw" href={contactData.socials[1].url} target="_blank" rel="noopener noreferrer">お絵かき <Icon name="twitter" /></a>
+      <TechnicalLink className="chip-github" href={contactData.socials[0].url} label="GitHub" icon="github" />
+      <TechnicalLink className="chip-draw" lang="ja" ariaLabel="お絵かき — Twitter @oreodraw" href={contactData.socials[1].url} label="お絵かき" icon="twitter" />
       <span className="cover-spark spark-front" aria-hidden="true">✦</span>
       <h1 id="cover-title">sonagii_</h1>
       <button className="cover-blur-toggle" type="button" aria-label="Blur effect" aria-pressed={blurEnabled} onClick={() => setBlurEnabled(value => !value)}><span aria-hidden="true" />Blur {blurEnabled ? 'on' : 'off'}</button>

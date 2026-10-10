@@ -337,6 +337,12 @@ a.cover-chip:hover, a.cover-chip:focus-visible { filter: none; }
 /* Warm paper / graphite, with a compact animated navigation track. */
 :root { --paper: #eeede7; --ink: #292a30; --blue: #304cd9; --line: #292a30; --soft-line: #292a3030; --accent-fill: #304cd9; --on-accent: #eeede7; --scene: #26272d; --nav-surface: #e2e1da; color-scheme: light; }
 :root[data-theme='dark'] { --paper: #202126; --ink: #e6e4dd; --blue: #ff3d67; --line: #b5b5bb70; --soft-line: #e6e4dd28; --accent-fill: #ff3d67; --on-accent: #202126; --scene: #2b2c33; --nav-surface: #33343d; color-scheme: dark; }
+/* The shared palette drives color; local hover transitions must not trail it. */
+:root[data-theme-transitioning] *,
+:root[data-theme-transitioning] *::before,
+:root[data-theme-transitioning] *::after {
+  transition-property: transform, translate, rotate, scale, opacity, filter, clip-path !important;
+}
 html { scroll-padding-top: 84px; }
 .masthead { height: 64px; gap: 20px; border-bottom-color: var(--soft-line); background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(14px); }
 .masthead::before { height: 64px; background: color-mix(in srgb, var(--paper) 92%, transparent); }
